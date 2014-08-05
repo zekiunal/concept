@@ -25,7 +25,10 @@ interface CacheInterface
      * @return mixed
      */
     public function set($key, $data);
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     /**
      * @param string $key
      *
