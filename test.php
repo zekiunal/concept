@@ -5,4 +5,3 @@ $loader->registerNamespaces(array(
 ));
 $loader->register();
 
-$cache = new \Concept\Cache\GlobalCache(array('key'=>'value'));
