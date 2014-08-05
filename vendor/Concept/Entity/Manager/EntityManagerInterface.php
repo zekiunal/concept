@@ -2,6 +2,7 @@
 namespace Concept\Entity\Manager;
 
 use Concept\Entity\EntityInterface;
+use Concept\Filter\FilterInterface;
 
 /**
  * @author      Zeki Unal <zekiunal@gmail.com>
