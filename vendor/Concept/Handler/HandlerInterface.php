@@ -9,7 +9,7 @@ use Concept\Filter\FilterInterface;
  * @description
  *
  * @package     Concept\Query
- * @name        QueryInterface
+ * @name        HandlerInterface
  * @version     0.1
  */
 interface HandlerInterface
