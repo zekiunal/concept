@@ -14,6 +14,15 @@ use Concept\Entity\EntityInterface;
  */
 class EntityManager implements EntityManagerInterface
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    protected static $processor;
+
+    public static function setHandler(EntityManagerInterface $processor)
+    {
+        self::$processor = $processor;
+    }
 
     /**
      * @param EntityInterface $entity
@@ -24,17 +33,17 @@ class EntityManager implements EntityManagerInterface
      */
     public static function save(EntityInterface $entity, $source, FilterInterface $filter)
     {
-        // TODO: Implement save() method.
+        return self::$processor->save($entity, $source, $filter);
     }
 
     /**
      * @param        FilterInterface $filter
      *
-     * @return       array|bool
+     * @return       array|false
      */
     public static function load($filter)
     {
-        // TODO: Implement load() method.
+        return self::$processor->load($filter);
     }
 
     /**
@@ -45,6 +54,6 @@ class EntityManager implements EntityManagerInterface
      */
     public static function delete($name, $id)
     {
-        // TODO: Implement delete() method.
+        return self::$processor->delete($name, $id);
     }
 }
