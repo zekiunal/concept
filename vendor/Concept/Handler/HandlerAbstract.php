@@ -16,6 +16,9 @@ abstract class HandlerAbstract
      */
     protected $successor;
 
+    /**
+     * @param HandlerInterface $nextService
+     */
     public function setSuccessor(HandlerInterface $nextService)
     {
         $this->successor=$nextService;

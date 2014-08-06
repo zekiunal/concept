@@ -8,7 +8,7 @@ use Concept\Filter\FilterInterface;
  * @author      Zeki Unal <zekiunal@gmail.com>
  * @description
  *
- * @package     Concept\Query
+ * @package     Concept\Handler
  * @name        HandlerInterface
  * @version     0.1
  */
