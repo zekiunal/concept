@@ -19,14 +19,14 @@ interface EntityManagerInterface
      * @param                 $source
      * @param FilterInterface $filter
      *
-     * @return array|false
+     * @return EntityInterface
      */
     public static function save(EntityInterface $entity, $source, FilterInterface $filter);
 
     /**
      * @param        FilterInterface $filter
      *
-     * @return       array|bool
+     * @return       array
      */
     public static function load($filter);
 
