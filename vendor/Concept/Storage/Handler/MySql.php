@@ -67,8 +67,6 @@ class MySql implements HandlerInterface, EntityManagerInterface
         $primary_set = "set".ucwords($source)."Id";
         $entity->$primary_set($result[$source.'_id']);
 
-        echo "Saved by mysql handler<br>";
-
         return $entity;
     }
 

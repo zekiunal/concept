@@ -56,8 +56,6 @@ class GlobalCache implements HandlerInterface, EntityManagerInterface
 
         $entity = self::$cache->set($key, $entity);
 
-        echo "Saved by global cache handler<br>";
-
         return $entity;
     }
 
