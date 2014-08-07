@@ -8,7 +8,7 @@ use Concept\EventDispatcher\EventDispatcherInterface;
  * @author      Zeki Unal <zekiunal@gmail.com>
  * @description
  *
- * @package     Concept\Cache
+ * @package     Concept\Business
  * @name        AbstractBusiness
  * @version     0.1
  */
