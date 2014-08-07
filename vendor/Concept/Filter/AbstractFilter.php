@@ -1,8 +1,15 @@
 <?php
 namespace Concept\Filter;
 
-
-class AbstractFilter implements FilterInterface
+/**
+ * @author      Zeki Unal <zekiunal@gmail.com>
+ * @description
+ *
+ * @package     Concept\Filter
+ * @name        AbstractFilter
+ * @version     0.1
+ */
+abstract class AbstractFilter implements FilterInterface
 {
 
     /**
