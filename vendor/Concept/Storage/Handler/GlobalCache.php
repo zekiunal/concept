@@ -75,7 +75,6 @@ class GlobalCache implements HandlerInterface, EntityManagerInterface
         $data = self::$cache->get($key);
 
         if($data) {
-            echo "Load data from Global Cache<br>";
             return $data;
         }
 
