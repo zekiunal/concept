@@ -22,4 +22,12 @@ interface EventDispatcherInterface
      *
      */
     public function addSubscriber(EventSubscriberInterface $subscriber);
+
+    /**
+     * @param     $event
+     * @param     $callback
+     * @param int $priority
+     * @return mixed
+     */
+    public function listen($event, $callback, $priority=0);
 }
