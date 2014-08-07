@@ -64,9 +64,8 @@ class GlobalCache implements HandlerInterface, EntityManagerInterface
      *
      * @return       array
      */
-    public static function load($filter)
+    public static function load(FilterInterface $filter)
     {
-
         /**
          * Generate key
          */
@@ -74,17 +73,24 @@ class GlobalCache implements HandlerInterface, EntityManagerInterface
 
         $data = self::$cache->get($key);
 
-        if($data) {
+        return ($data) ? $data : self::loadByProcessor($filter, $key);
+    }
+
+    /**
+     * @param FilterInterface $filter
+     * @param                 $key
+     *
+     * @return array
+     */
+    protected static function loadByProcessor(FilterInterface $filter, $key)
+    {
+        $data = self::$processor->load($filter);
+
+        if ($data) {
+            self::$cache->set($key, $data);
             return $data;
         }
 
-        if (!$data) {
-            $data = self::$processor->load($filter);
-            if ($data) {
-                self::$cache->set($key, $data);
-                return $data;
-            }
-        }
         return array();
     }
 
