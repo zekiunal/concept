@@ -28,7 +28,7 @@ interface EntityManagerInterface
      *
      * @return       array
      */
-    public static function load($filter);
+    public static function load(FilterInterface $filter);
 
     /**
      * @param $name
