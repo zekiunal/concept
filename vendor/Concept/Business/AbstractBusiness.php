@@ -115,6 +115,4 @@ abstract class AbstractBusiness implements EntityInterface
 
         static::$dispatcher->listen($event, $callback, $priority);
     }
-
-
 }
