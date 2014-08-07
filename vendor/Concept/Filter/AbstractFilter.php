@@ -11,6 +11,35 @@ namespace Concept\Filter;
  */
 abstract class AbstractFilter implements FilterInterface
 {
+    /**
+     * @var FilterInterface
+     */
+    protected $filter;
+
+    /**
+     * @var string
+     */
+    protected $limit = " LIMIT 0, 30";
+
+    /**
+     * @var array
+     */
+    protected $where = array();
+
+    /**
+     * @var array
+     */
+    protected $from = array();
+
+    /**
+     * @var array
+     */
+    protected $fields = array();
+
+    /**
+     * @var array
+     */
+    protected $properties = array();
 
     /**
      * @param string  $column_name
