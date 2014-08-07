@@ -94,7 +94,6 @@ class GlobalCache implements HandlerInterface, EntityManagerInterface
         return array();
     }
 
-
     /**
      * @param $name
      * @param $id
