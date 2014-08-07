@@ -15,16 +15,22 @@ use Concept\EventDispatcher\EventDispatcherInterface;
 abstract class AbstractBusiness implements EntityInterface
 {
     /**
+     * EntityInterface implementation of convertArray()
+     *
      * @return array
      */
     abstract public function convertArray();
 
     /**
+     * EntityInterface implementation of getId()
+     *
      * @return mixed
      */
     abstract public function getId();
 
     /**
+     * EntityInterface implementation of setId()
+     *
      * @param  mixed $id
      *
      * @return mixed
