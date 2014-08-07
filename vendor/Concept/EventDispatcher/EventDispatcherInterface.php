@@ -20,7 +20,6 @@ interface EventDispatcherInterface
      *
      * @param EventSubscriberInterface $subscriber The subscriber.
      *
-     * @api
      */
     public function addSubscriber(EventSubscriberInterface $subscriber);
 }
