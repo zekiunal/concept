@@ -166,7 +166,13 @@ abstract class AbstractUser extends AbstractBusiness
      */
     public function convertArray()
     {
-        // TODO: Implement convertArray() method.
+        $data['user_id']    = $this->user_id;
+        $data['username']   = $this->username;
+        $data['email']      = $this->email;
+        $data['password']   = $this->password;
+        $data['first_name'] = $this->first_name;
+        $data['last_name']  = $this->last_name;
+        return $data;
     }
 
     /**
