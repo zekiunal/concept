@@ -98,7 +98,7 @@ class DataProcess implements  EntityManagerInterface
      *
      * @return       array|bool
      */
-    public static function load($filter)
+    public static function load(FilterInterface $filter)
     {
         return self::$processor->load($filter);
     }

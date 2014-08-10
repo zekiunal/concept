@@ -35,7 +35,7 @@ class NullHandler extends HandlerAbstract implements HandlerInterface, EntityMan
      *
      * @return       array
      */
-    public static function load($filter)
+    public static function load(FilterInterface $filter)
     {
         return array();
     }

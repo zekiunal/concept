@@ -83,7 +83,6 @@ class MySql implements HandlerInterface, EntityManagerInterface
      */
     protected static function insert($data, $statement, $properties, $source)
     {
-
         $statement = self::$connection->prepare($statement);
 
         foreach ($properties as $key=>$value) {
@@ -121,7 +120,6 @@ class MySql implements HandlerInterface, EntityManagerInterface
      */
     protected static function update($data, $statement, $properties)
     {
-
         $statement = self::$connection->prepare($statement);
 
         foreach ($properties as $key=>$value) {
@@ -139,7 +137,7 @@ class MySql implements HandlerInterface, EntityManagerInterface
      *
      * @return       array
      */
-    public static function load($filter)
+    public static function load(FilterInterface $filter)
     {
         /**
          * fetch data from mysql database
