@@ -1,11 +1,13 @@
 <?php
-namespace ExampleProject\Core\Collection;
+namespace ExampleProject\Custom\Collection;
+
+use ExampleProject\Core\Collection\AbstractUserCollection;
 
 /**
  * @author      Zeki Unal <zekiunal@gmail.com>
  * @description
  *
- * @package     ExampleProject\Core\Collection
+ * @package     ExampleProject\Custom\Collection
  * @name        UserCollection
  * @version     0.1
  */

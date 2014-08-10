@@ -1,11 +1,13 @@
 <?php
-namespace ExampleProject\Core\Business;
+namespace ExampleProject\Custom\Business;
+
+use ExampleProject\Core\Business\AbstractUser;
 
 /**
  * @author      Zeki Unal <zekiunal@gmail.com>
  * @description
  *
- * @package     ExampleProject\Core\Business
+ * @package     ExampleProject\Custom\Business
  * @name        User
  * @version     0.1
  */

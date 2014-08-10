@@ -1,6 +1,8 @@
 <?php
 namespace ExampleProject\Core\Business;
+
 use Concept\Business\AbstractBusiness;
+use ExampleProject\Custom\Business\User;
 
 /**
  * @author      Zeki Unal <zekiunal@gmail.com>
@@ -12,6 +14,10 @@ use Concept\Business\AbstractBusiness;
  */
 abstract class AbstractUser extends AbstractBusiness
 {
+    /**
+     * @var mixed
+     */
+    protected $user_id;
 
     /**
      * EntityInterface implementation of convertArray()
@@ -30,7 +36,7 @@ abstract class AbstractUser extends AbstractBusiness
      */
     public function getId()
     {
-        // TODO: Implement getId() method.
+        return $this->user_id;
     }
 
     /**
@@ -38,10 +44,11 @@ abstract class AbstractUser extends AbstractBusiness
      *
      * @param  mixed $id
      *
-     * @return mixed
+     * @return User
      */
     public function setId($id)
     {
-        // TODO: Implement setId() method.
+        $this->user_id = $id;
+        return $this;
     }
 }

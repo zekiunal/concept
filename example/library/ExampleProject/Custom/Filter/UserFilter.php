@@ -1,11 +1,13 @@
 <?php
-namespace ExampleProject\Core\Filter;
+namespace ExampleProject\Custom\Filter;
+
+use ExampleProject\Core\Filter\AbstractUserFilter;
 
 /**
  * @author      Zeki Unal <zekiunal@gmail.com>
  * @description
  *
- * @package     ExampleProject\Core\Filter
+ * @package     ExampleProject\Custom\Filter
  * @name        UserFilter
  * @version     0.1
  */

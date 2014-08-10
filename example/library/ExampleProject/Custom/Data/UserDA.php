@@ -1,5 +1,7 @@
 <?php
-namespace ExampleProject\Core\Data;
+namespace ExampleProject\Custom\Data;
+
+use ExampleProject\Core\Data\AbstractUserDA;
 
 /**
  * @author      Zeki Unal <zekiunal@gmail.com>
