@@ -30,4 +30,10 @@ interface EventDispatcherInterface
      * @return mixed
      */
     public function listen($event, $callback, $priority=0);
+
+    /**
+     * @param $event
+     * @param $param
+     */
+    public function dispatch($event, $param);
 }
