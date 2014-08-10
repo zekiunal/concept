@@ -15,9 +15,148 @@ use ExampleProject\Custom\Business\User;
 abstract class AbstractUser extends AbstractBusiness
 {
     /**
-     * @var mixed
+     * @var int
      */
     protected $user_id;
+
+    /**
+     * @var string
+     */
+    protected $username;
+
+    /**
+     * @var string
+     */
+    protected $email;
+
+    /**
+     * @var string
+     */
+    protected $password;
+
+    /**
+     * @var string
+     */
+    protected $first_name;
+
+    /**
+     * @var string
+     */
+    protected $last_name;
+
+    /**
+     * @param string $email
+     *
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $first_name
+     *
+     * @return User
+     */
+    public function setFirstName($first_name)
+    {
+        $this->first_name = $first_name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->first_name;
+    }
+
+    /**
+     * @param string $last_name
+     *
+     * @return User
+     */
+    public function setLastName($last_name)
+    {
+        $this->last_name = $last_name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->last_name;
+    }
+
+    /**
+     * @param string $password
+     *
+     * @return User
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param int $user_id
+     *
+     * @return User
+     */
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * @param string $username
+     *
+     * @return User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
 
     /**
      * EntityInterface implementation of convertArray()
@@ -32,11 +171,11 @@ abstract class AbstractUser extends AbstractBusiness
     /**
      * EntityInterface implementation of getId()
      *
-     * @return mixed
+     * @see getUserId()
      */
     public function getId()
     {
-        return $this->user_id;
+        return $this->getUserId();
     }
 
     /**
@@ -44,11 +183,12 @@ abstract class AbstractUser extends AbstractBusiness
      *
      * @param  mixed $id
      *
-     * @return User
+     * @see getUserId()
+     *
+     * @return mixed
      */
     public function setId($id)
     {
-        $this->user_id = $id;
-        return $this;
+        return $this->setUserId($id);
     }
 }
