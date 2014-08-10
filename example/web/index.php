@@ -13,7 +13,12 @@ $loader->register();
 /**
  * Bootstrap
  */
-$mysql_configurations = array(array('engine'   => 'mysql','hostname' => 'localhost','username' => 'root','password' => 'mysql','database' => 'test'),3);
+$mysql_configurations = array(array(
+    'engine'   => 'mysql',
+    'hostname' => 'localhost',
+    'username' => 'root',
+    'password' => 'mysql',
+    'database' => 'test'),3);
 $processor_configurations = array(
     'mysql'           => $mysql_configurations
 );
