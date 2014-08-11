@@ -15,6 +15,20 @@ use Concept\EventDispatcher\EventDispatcherInterface;
 abstract class AbstractBusiness implements EntityInterface
 {
     /**
+     * User exposed observable events
+     *
+     * @var array
+     */
+    protected $observables = array();
+
+    /**
+     * The event dispatcher instance.
+     *
+     * @var EventDispatcherInterface
+     */
+    protected static $dispatcher;
+
+    /**
      * EntityInterface implementation of convertArray()
      *
      * @return array
@@ -36,20 +50,6 @@ abstract class AbstractBusiness implements EntityInterface
      * @return mixed
      */
     abstract public function setId($id);
-
-    /**
-     * User exposed observable events
-     *
-     * @var array
-     */
-    protected $observables = array();
-
-    /**
-     * The event dispatcher instance.
-     *
-     * @var EventDispatcherInterface
-     */
-    protected static $dispatcher;
 
     /**
      * Get the observable event names.

@@ -34,7 +34,7 @@ use ArrayIterator;
  * @name        AbstractCollection
  * @version     0.1
  */
-abstract class AbstractCollection implements CollectionInterface
+class AbstractCollection implements CollectionInterface
 {
     /**
      * An array containing the entries of this collection.

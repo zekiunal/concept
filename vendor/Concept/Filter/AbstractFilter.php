@@ -41,6 +41,45 @@ abstract class AbstractFilter implements FilterInterface
      */
     protected $properties = array();
 
+    public function __construct()
+    {
+    }
+
+    /**
+     * @param $where
+     * @return FilterInterface
+     */
+    public function addWhere($where)
+    {
+        if(!empty($where) && !in_array($where, $this->where)) {
+            $this->where[] = $where;
+        }
+        return $this;
+    }
+
+    /**
+     * @param $fields
+     * @param $source
+     */
+    protected function setup($fields, $source)
+    {
+        $this->fields = array_merge($fields, $this->fields);
+        $this->properties[$source] = $fields;
+        $this->addFrom($source);
+    }
+
+    /**
+     * @param string $source
+     * @return FilterInterface
+     */
+    public function addFrom($source)
+    {
+        if(!empty($source) && !in_array($source, $this->from)) {
+            $this->from[] = $source;
+        }
+        return $this;
+    }
+
     /**
      * @param string  $column_name
      * @param string  $value
@@ -119,12 +158,11 @@ abstract class AbstractFilter implements FilterInterface
         // TODO: Implement setId() method.
     }
 
-    /**
-     * @description
-     * @return       array
-     */
-    public function getProperties()
+    public function getProperties($source=null)
     {
-        // TODO: Implement getProperties() method.
+        if($source) {
+            return $this->properties[$source];
+        }
+        return $this->properties;
     }
 }

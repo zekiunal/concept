@@ -29,7 +29,7 @@ class EntityManager implements EntityManagerInterface
      * @param                 $source
      * @param FilterInterface $filter
      *
-     * @return array|false
+     * @return EntityInterface
      */
     public static function save(EntityInterface $entity, $source, FilterInterface $filter)
     {
@@ -41,7 +41,7 @@ class EntityManager implements EntityManagerInterface
      *
      * @return       array|false
      */
-    public static function load($filter)
+    public static function load(FilterInterface $filter)
     {
         return self::$processor->load($filter);
     }
