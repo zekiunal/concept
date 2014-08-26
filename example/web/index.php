@@ -40,11 +40,17 @@ $user->setFirstName('Zeki');
 $user->setLastName('Unal');
 $user->setPassword('password');
 $user->setUsername('zekiunal');
-$user->save();
+//$user->save();
 
-$user->setPassword('password_updated')->save();
+//$user->setPassword('password_updated')->save();
 
-$user_1 = \ExampleProject\Custom\Data\UserDA::loadById(1);
+$user_1 = \ExampleProject\Custom\Data\UserDA::loadById(2);
+$user_1->setPassword('password_updated_2')->save();
 dump($user_1);
 
+$filter = new \ExampleProject\Custom\Filter\UserFilter();
+$filter->setLimit(10);
 
+$user_list = \ExampleProject\Custom\Data\UserDA::load($filter);
+
+dump($user_list);
