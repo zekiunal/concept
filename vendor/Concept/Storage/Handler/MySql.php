@@ -145,7 +145,6 @@ class MySql implements HandlerInterface, EntityManagerInterface
         $data = self::runSQL(MySqlQuery::select($filter), $filter->getParameters());
 
         if ($data) {
-            echo "Load data from MySql<br>";
             return $data;
         } else {
             /**
