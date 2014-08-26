@@ -50,6 +50,7 @@ dump($user_1);
 
 $filter = new \ExampleProject\Custom\Filter\UserFilter();
 $filter->setLimit(10);
+$filter->findBy('password','password',true);
 
 $user_list = \ExampleProject\Custom\Data\UserDA::load($filter);
-
+dump($user_list);
