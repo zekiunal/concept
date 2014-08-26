@@ -46,6 +46,15 @@ abstract class AbstractFilter implements FilterInterface
     }
 
     /**
+     * @param int $count
+     * @param int $offset
+     */
+    public function setLimit($count=30, $offset=0)
+    {
+        $this->limit = " LIMIT ". $offset .", ". $count;
+    }
+
+    /**
      * @param $where
      * @return FilterInterface
      */
