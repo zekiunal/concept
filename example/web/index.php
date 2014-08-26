@@ -53,4 +53,3 @@ $filter->setLimit(10);
 
 $user_list = \ExampleProject\Custom\Data\UserDA::load($filter);
 
-dump($user_list);
