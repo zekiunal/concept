@@ -97,7 +97,7 @@ abstract class AbstractFilter implements FilterInterface
      */
     public function select()
     {
-        // TODO: Implement select() method.
+        return $this->fields;
     }
 
     /**
@@ -105,7 +105,7 @@ abstract class AbstractFilter implements FilterInterface
      */
     public function from()
     {
-        // TODO: Implement from() method.
+        return $this->from;
     }
 
     /**
@@ -113,7 +113,7 @@ abstract class AbstractFilter implements FilterInterface
      */
     public function where()
     {
-        // TODO: Implement where() method.
+        return $this->where;
     }
 
     /**
@@ -121,7 +121,7 @@ abstract class AbstractFilter implements FilterInterface
      */
     public function limit()
     {
-        // TODO: Implement limit() method.
+        return $this->limit;
     }
 
     /**
