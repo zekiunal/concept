@@ -10,7 +10,6 @@ use Concept\Handler\HandlerInterface;
  * @author      Zeki Unal <zekiunal@gmail.com>
  * @description
  *
- *
  * @package     Concept\Storage\Handler
  * @name        DataProcess
  * @version     0.1
