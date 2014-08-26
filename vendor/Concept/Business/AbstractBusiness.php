@@ -52,6 +52,20 @@ abstract class AbstractBusiness implements EntityInterface
     abstract public function setId($id);
 
     /**
+     * @todo its not good way
+     * @param array $data
+     */
+    public function bind($data)
+    {
+        $keys = array_keys($data);
+        foreach($keys as $value) {
+            if(isset($data[$value]) and ($this->$value != $data[$value])) {
+                $this->$value = $data[$value];
+            }
+        }
+    }
+
+    /**
      * Get the observable event names.
      *
      * @return array

@@ -34,4 +34,9 @@ interface EntityInterface
      * @return array
      */
     public function getObservableEvents();
+
+    /**
+     * @param array $data
+     */
+    public function bind($data);
 }

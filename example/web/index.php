@@ -1,6 +1,12 @@
 <?php
 use ExampleProject\Custom\Business\User;
 
+function dump($data) {
+    echo "<pre>";
+    var_dump($data);
+    echo "</pre>";
+}
+
 /**
  * register classes with namespaces
  */
@@ -37,5 +43,8 @@ $user->setUsername('zekiunal');
 $user->save();
 
 $user->setPassword('password_updated')->save();
+
+$user_1 = \ExampleProject\Custom\Data\UserDA::loadById(1);
+dump($user_1);
 
 
