@@ -41,9 +41,12 @@ abstract class AbstractFilter implements FilterInterface
      */
     protected $properties = array();
 
-    public function __construct()
-    {
-    }
+    /**
+     * @var array
+     */
+    protected $find_by;
+
+    public function __construct(){}
 
     /**
      * @param int $count
@@ -60,9 +63,10 @@ abstract class AbstractFilter implements FilterInterface
      */
     public function addWhere($where)
     {
-        if(!empty($where) && !in_array($where, $this->where)) {
+        if (!empty($where) && !in_array($where, $this->where)) {
             $this->where[] = $where;
         }
+
         return $this;
     }
 
@@ -83,22 +87,44 @@ abstract class AbstractFilter implements FilterInterface
      */
     public function addFrom($source)
     {
-        if(!empty($source) && !in_array($source, $this->from)) {
+        if (!empty($source) && !in_array($source, $this->from)) {
             $this->from[] = $source;
         }
+
         return $this;
     }
 
     /**
-     * @param string  $column_name
-     * @param string  $value
+     * @param string $column_name
+     * @param string $value
      * @param boolean $equal
      *
      * @return FilterInterface
      */
-    public function findBy($column_name, $value, $equal = true)
+    public function findBy($column_name, $value, $equal=true)
     {
-        // TODO: Implement findBy() method.
+        $source = $this->getSourceM($column_name);
+        $this->filter->addWhere(array(
+            'source' => $source,
+            'field'  => $column_name,
+            'value'  => $value,
+            'equal'  => $equal
+        ));
+        return $this;
+    }
+
+    /**
+     * @param string $column_name
+     * @return string
+     */
+    protected function getSourceM($column_name)
+    {
+        $size = count($this->fields);
+        for ($i=0; $i < $size; $i++) {
+            if ($this->fields[$i][1] == $column_name) {
+                return $this->fields[$i][0];
+            }
+        }
     }
 
     /**
@@ -173,9 +199,10 @@ abstract class AbstractFilter implements FilterInterface
      */
     public function getProperties($source=null)
     {
-        if($source) {
+        if ($source) {
             return $this->properties[$source];
         }
+
         return $this->properties;
     }
 }
