@@ -167,6 +167,10 @@ abstract class AbstractFilter implements FilterInterface
         // TODO: Implement setId() method.
     }
 
+    /**
+     * @param null $source
+     * @return array
+     */
     public function getProperties($source=null)
     {
         if($source) {
