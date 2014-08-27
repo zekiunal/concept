@@ -2,6 +2,7 @@
 namespace Concept\Storage\Handler;
 
 use Concept\Entity\EntityInterface;
+use Concept\Entity\Manager\EntityManager;
 use Concept\Entity\Manager\EntityManagerInterface;
 use Concept\Filter\FilterInterface;
 use Concept\Handler\HandlerInterface;
@@ -35,29 +36,28 @@ class MySql implements HandlerInterface, EntityManagerInterface
 
     /**
      * @param EntityInterface $entity
-     * @param                 $source
-     * @param FilterInterface $filter
+     * @param boolean $process
      *
      * @return EntityInterface
      */
-    public static function save(EntityInterface $entity, $source, $filter=null)
+    public static function save(EntityInterface $entity, $process=true)
     {
-        self::$processor->save($entity, $source, $filter);
+        $filter = EntityManager::getEntityFilter($entity);
+        $source = EntityManager::getEntitySource($entity);
 
-        $primary_get = "get".ucwords($source)."Id";
+        if ($process) self::$processor->save($entity);
 
         $properties = ($filter->getProperties($source));
 
         $data = $entity->convertArray();
 
         $result = (
-        ($entity->$primary_get() === 0 || $entity->$primary_get() === null) ?
+        ($entity->getId() === 0 || $entity->getId() === null) ?
             self::$driver->insert($data, MySqlQuery::insert($source, $properties), $properties, $source) :
             self::$driver->update($data, MySqlQuery::update($source, $properties), $properties)
         );
 
-        $primary_set = "set".ucwords($source)."Id";
-        $entity->$primary_set($result[$source.'_id']);
+        $entity->setId($result[$source.'_id']);
 
         return $entity;
     }
