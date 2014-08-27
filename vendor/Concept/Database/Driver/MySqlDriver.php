@@ -50,7 +50,7 @@ class MySqlDriver
     {
         $statement = $this->connection->prepare($statement);
 
-        foreach ($properties as $key=>$value) {
+        foreach ($properties as $value) {
             $statement->bindValue(':'.$value[1], $data[$value[1]]);
         }
 
@@ -71,7 +71,7 @@ class MySqlDriver
     {
         $statement = $this->connection->prepare($statement);
 
-        foreach ($properties as $key=>$value) {
+        foreach ($properties as $value) {
             $statement->bindValue(':'.$value[1], $data[$value[1]]);
         }
 
