@@ -54,3 +54,5 @@ $filter->findBy('password','password',true);
 
 $user_list = \ExampleProject\Custom\Data\UserDA::load($filter);
 dump($user_list);
+
+\Concept\Storage\Handler\MySql::save($user);

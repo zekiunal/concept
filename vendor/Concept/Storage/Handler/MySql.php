@@ -6,6 +6,7 @@ use Concept\Entity\Manager\EntityManagerInterface;
 use Concept\Filter\FilterInterface;
 use Concept\Handler\HandlerInterface;
 use Concept\Query\MySql as MySqlQuery;
+use Concept\Database\Driver\MySqlDriver;
 
 /**
  * @author      Zeki Unal <zekiunal@gmail.com>
@@ -18,27 +19,18 @@ use Concept\Query\MySql as MySqlQuery;
 class MySql implements HandlerInterface, EntityManagerInterface
 {
     /**
-     * @var \PDO
-     */
-    protected static $connection;
-
-    /**
      * @var EntityManagerInterface
      */
     protected static $processor;
 
+    /**
+     * @var MySqlDriver
+     */
+    protected static $driver;
+
     public function __construct($configuration=array())
     {
-        $engine = $configuration['engine'].':dbname=';
-        $db = new \PDO(
-            $engine.$configuration['database'].";host=".$configuration['hostname'],
-            $configuration['username'],
-            $configuration['password']
-        );
-        $db->query('SET NAMES UTF8');
-        $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-
-        self::$connection = $db;
+        self::$driver = new MySqlDriver($configuration);
     }
 
     /**
@@ -48,7 +40,7 @@ class MySql implements HandlerInterface, EntityManagerInterface
      *
      * @return EntityInterface
      */
-    public static function save(EntityInterface $entity, $source, FilterInterface $filter)
+    public static function save(EntityInterface $entity, $source, $filter=null)
     {
         self::$processor->save($entity, $source, $filter);
 
@@ -60,76 +52,14 @@ class MySql implements HandlerInterface, EntityManagerInterface
 
         $result = (
         ($entity->$primary_get() === 0 || $entity->$primary_get() === null) ?
-            self::insert($data, MySqlQuery::insert($source, $properties), $properties, $source) :
-            self::update($data, MySqlQuery::update($source, $properties), $properties)
+            self::$driver->insert($data, MySqlQuery::insert($source, $properties), $properties, $source) :
+            self::$driver->update($data, MySqlQuery::update($source, $properties), $properties)
         );
 
         $primary_set = "set".ucwords($source)."Id";
         $entity->$primary_set($result[$source.'_id']);
 
         return $entity;
-    }
-
-    /**
-     * @author      Zeki Unal <zekiunal@gmail.com>
-     * @description
-     *
-     * @param $data
-     * @param $statement
-     * @param $properties
-     * @param $source
-     *
-     * @return       mixed
-     */
-    protected static function insert($data, $statement, $properties, $source)
-    {
-        $statement = self::$connection->prepare($statement);
-
-        foreach ($properties as $key=>$value) {
-            $statement->bindValue(':'.$value[1], $data[$value[1]]);
-        }
-
-        $statement->execute();
-        $key = $source.'_id';
-        $data[$key] = self::$connection->lastInsertId();
-        $statement->closeCursor();
-        return $data;
-    }
-
-    /**
-     * @param  string  $statement
-     * @param  array   $parameters
-     * @param  integer $method
-     *
-     * @return array
-     */
-    protected static function runSQL($statement, $parameters, $method=\PDO::FETCH_ASSOC)
-    {
-        $stmt = self::$connection->prepare($statement);
-        $stmt->execute($parameters);
-        $result = $stmt->fetchAll($method);
-        $stmt->closeCursor();
-        return $result;
-    }
-
-    /**
-     * @param $data
-     * @param $statement
-     * @param $properties
-     * @return       mixed
-     */
-    protected static function update($data, $statement, $properties)
-    {
-        $statement = self::$connection->prepare($statement);
-
-        foreach ($properties as $key=>$value) {
-            $statement->bindValue(':'.$value[1], $data[$value[1]]);
-        }
-
-        $statement->execute();
-        $statement->closeCursor();
-
-        return $data;
     }
 
     /**
@@ -142,7 +72,7 @@ class MySql implements HandlerInterface, EntityManagerInterface
         /**
          * fetch data from mysql database
          */
-        $data = self::runSQL(MySqlQuery::select($filter), $filter->getParameters());
+        $data = self::$driver->runSQL(MySqlQuery::select($filter), $filter->getParameters());
 
         if ($data) {
             return $data;
@@ -153,16 +83,12 @@ class MySql implements HandlerInterface, EntityManagerInterface
             $data = self::$processor->load($filter);
 
             if($data) {
-
-                /**
-                 * Generate insert query for MySql database
-                 */
-                $query = MySqlQuery::insert($data, $filter->getSource());
-
                 /**
                  * insert data from mysql database
                  */
-                return array(self::insert($data, $query, $filter->getProperties($filter->getSource()) ,$filter->getSource()));
+                return array(
+                    self::$driver->insert($data, MySqlQuery::insert($data, $filter->getSource()), $filter->getProperties($filter->getSource()) ,$filter->getSource())
+                );
             }
         }
         return array();

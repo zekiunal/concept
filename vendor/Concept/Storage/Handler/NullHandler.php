@@ -25,7 +25,7 @@ class NullHandler extends HandlerAbstract implements HandlerInterface, EntityMan
      *
      * @return EntityInterface
      */
-    public static function save(EntityInterface $entity, $source, FilterInterface $filter)
+    public static function save(EntityInterface $entity, $source, $filter=null)
     {
         return false;
     }

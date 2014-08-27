@@ -51,7 +51,7 @@ abstract class AbstractUserDA
      */
     public static function save(User $entity)
     {
-        return EntityManager::save($entity, 'user', new UserFilter());
+        return EntityManager::save($entity, 'user');
     }
 
     /**

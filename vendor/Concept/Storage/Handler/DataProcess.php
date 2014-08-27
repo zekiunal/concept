@@ -88,7 +88,7 @@ class DataProcess implements  EntityManagerInterface
      *
      * @return array|false
      */
-    public static function save(EntityInterface $entity, $source, FilterInterface $filter)
+    public static function save(EntityInterface $entity, $source, $filter=null)
     {
         return self::$processor->save($entity, $source, $filter);
     }
