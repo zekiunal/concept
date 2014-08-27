@@ -15,7 +15,7 @@ class MySql
     {
         $k=0;
         $statement = "SELECT ";
-        foreach($filter->select() as $key=>$value) {
+        foreach($filter->select() as $value) {
             if($k != 0) {
                 $statement .= ', ';
             }
@@ -26,7 +26,7 @@ class MySql
         $statement .= " FROM ";
 
         $k=0;
-        foreach($filter->from() as $key=>$value) {
+        foreach($filter->from() as $value) {
             if($k != 0) {
                 $statement .= ', ';
             }
@@ -37,7 +37,7 @@ class MySql
         $statement .= " WHERE 1=1 ";
 
         $k=0;
-        foreach($filter->where() as $key=>$value) {
+        foreach($filter->where() as $value) {
             $statement .= ' AND ';
             if($value['equal']) {
                 $equal = '=';
@@ -71,7 +71,7 @@ class MySql
 
         $statement = "INSERT INTO `" . $source . "` SET ";
         $k=0;
-        foreach($properties as $key=>$value) {
+        foreach($properties as $value) {
             if($k > 0) {
                 $statement .= ', ';
             }
@@ -92,7 +92,7 @@ class MySql
         $statement = "UPDATE `" . $source . "` SET ";
         $k=0;
 
-        foreach($properties as $key=>$value) {
+        foreach($properties as $value) {
             if($k > 0) {
                 $statement .= ', ';
             }

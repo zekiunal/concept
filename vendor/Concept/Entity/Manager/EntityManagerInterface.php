@@ -16,12 +16,10 @@ interface EntityManagerInterface
 {
     /**
      * @param EntityInterface $entity
-     * @param                 $source
-     * @param FilterInterface $filter
      *
      * @return EntityInterface
      */
-    public static function save(EntityInterface $entity, $source, $filter=null);
+    public static function save(EntityInterface $entity);
 
     /**
      * @param        FilterInterface $filter
