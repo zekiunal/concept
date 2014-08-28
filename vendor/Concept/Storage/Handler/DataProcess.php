@@ -65,6 +65,8 @@ class DataProcess implements  EntityManagerInterface
                 return new GlobalCache($config);
             case 'mysql' :
                 return new MySql($config);
+            case 'sqlite' :
+                return new SQLite($config);
             /*
             case 'redis' :
                 return new Redis($config);
