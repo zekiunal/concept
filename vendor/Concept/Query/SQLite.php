@@ -1,9 +1,16 @@
 <?php
 namespace Concept\Query;
 
-
 use Concept\Filter\FilterInterface;
 
+/**
+ * @author      Zeki Unal <zekiunal@gmail.com>
+ * @description
+ *
+ * @package     Concept\Query
+ * @name        SQLite
+ * @version     0.1
+ */
 class SQLite
 {
     /**

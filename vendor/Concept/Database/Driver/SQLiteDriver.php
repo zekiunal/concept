@@ -1,6 +1,16 @@
 <?php
 namespace Concept\Database\Driver;
 
+use PDO;
+
+/**
+ * @author      Zeki Unal <zekiunal@gmail.com>
+ * @description
+ *
+ * @package     Concept\Database\Driver
+ * @name        SQLiteDriver
+ * @version     0.1
+ */
 class SQLiteDriver
 {
     /**
@@ -11,12 +21,9 @@ class SQLiteDriver
     public function __construct($configuration=array())
     {
         $engine = $configuration['engine'].':';
-        $db = new \PDO(
-            $engine.$configuration['database']
-        );
+        $db = new PDO($engine.$configuration['database']);
         $db->query('SET NAMES UTF8');
         $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-
         $this->connection = $db;
     }
 

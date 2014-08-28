@@ -1,7 +1,6 @@
 <?php
 namespace Concept\Storage\Handler;
 
-
 use Concept\Entity\EntityInterface;
 use Concept\Entity\Manager\EntityManager;
 use Concept\Entity\Manager\EntityManagerInterface;
