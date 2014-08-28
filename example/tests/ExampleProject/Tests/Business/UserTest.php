@@ -35,19 +35,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($user_array, $data);
     }
 
-    public function testSave()
-    {
-        $user = new User();
-        $user->setUsername('username');
-        $user->setEmail('test@email.com');
-        $user->setPassword('password');
-        $user->setFirstName('first_name');
-        $user->setLastName('last_name');
-        $this->assertEmpty($user->getId());
-        $user->save();
-        $this->assertNotEmpty($user->getId());
-    }
-
     public function testBind()
     {
         $data['user_id']    = 1;
@@ -61,5 +48,36 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $user->bind($data);
 
         $this->assertSame($user->convertArray(), $data);
+    }
+
+    public function testSave()
+    {
+        $user = new User();
+        $user->setUsername('username');
+        $user->setEmail('test@email.com');
+        $user->setPassword('password');
+        $user->setFirstName('first_name');
+        $user->setLastName('last_name');
+        $this->assertEmpty($user->getId());
+        $user->save();
+        $this->assertNotEmpty($user->getId());
+    }
+
+    public function testUpdate()
+    {
+        $user = new User();
+        $user->setUsername('username');
+        $user->setEmail('test@email.com');
+        $user->setPassword('password');
+        $user->setFirstName('first_name');
+        $user->setLastName('last_name');
+        $this->assertEmpty($user->getId());
+        $user->save();
+        $this->assertNotEmpty($user->getId());
+        $user->setFirstName('updated_first_name');
+        $user->save();
+
+        $this->assertEquals($user->getFirstName(), 'updated_first_name');
+
     }
 }

@@ -11,14 +11,11 @@ $loader->register();
 /**
  * Bootstrap
  */
-$mysql_configurations = array(array(
-    'engine'   => 'mysql',
-    'hostname' => 'localhost',
-    'username' => 'root',
-    'password' => 'mysql',
-    'database' => 'test'),3);
+$sql_configurations = array(array(
+    'engine'   => 'sqlite',
+    'database' => 'test.sqlite'),3);
 $processor_configurations = array(
-    'mysql'           => $mysql_configurations
+    'sqlite'           => $sql_configurations
 );
 $processor = new \Concept\Storage\Handler\DataProcess($processor_configurations);
 \Concept\Entity\Manager\EntityManager::setHandler($processor);
