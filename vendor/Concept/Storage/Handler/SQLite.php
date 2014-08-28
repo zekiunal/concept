@@ -54,7 +54,7 @@ class SQLite implements HandlerInterface, EntityManagerInterface
         $result = (
         ($entity->getId() === 0 || $entity->getId() === null) ?
             self::$driver->insert($data, SQLiteQuery::insert($source, $properties), $properties, $source) :
-            self::$driver->update($data, MySqlQuery::update($source, $properties), $properties)
+            self::$driver->update($data, SQLiteQuery::update($source, $properties), $properties)
         );
 
         $entity->setId($result[$source.'_id']);

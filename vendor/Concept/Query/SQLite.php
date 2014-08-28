@@ -114,7 +114,7 @@ class SQLite
             if($k > 0) {
                 $statement .= ', ';
             }
-            $statement .= '`' . $source . '`.`' . $value[1] .'` = :'. $value[1] .'';
+            $statement .= '`' . $value[1] .'` = :'. $value[1] .'';
             $k++;
         }
 
