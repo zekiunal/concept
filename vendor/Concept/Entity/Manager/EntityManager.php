@@ -26,10 +26,11 @@ class EntityManager implements EntityManagerInterface
 
     /**
      * @param EntityInterface $entity
+     * @param boolean $process
      *
      * @return EntityInterface
      */
-    public static function save(EntityInterface $entity)
+    public static function save(EntityInterface $entity, $process=true)
     {
         return self::$processor->save($entity);
     }

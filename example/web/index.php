@@ -38,7 +38,7 @@ $user = new User();
 $user->setEmail('zekiunal@gmail.com');
 $user->setFirstName('Zeki');
 $user->setLastName('Unal');
-$user->setPassword('password');
+$user->setPassword('password'.rand());
 $user->setUsername('zekiunal');
 //$user->save();
 
@@ -55,4 +55,4 @@ $filter->findBy('password','password',true);
 $user_list = \ExampleProject\Custom\Data\UserDA::load($filter);
 dump($user_list);
 
-//\Concept\Storage\Handler\Mysql::save($user);
+\Concept\Storage\Handler\Mysql::save($user);

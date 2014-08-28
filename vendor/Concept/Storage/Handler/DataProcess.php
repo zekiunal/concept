@@ -83,12 +83,13 @@ class DataProcess implements  EntityManagerInterface
 
     /**
      * @param EntityInterface $entity
+     * @param boolean $process
      *
      * @return array|false
      */
-    public static function save(EntityInterface $entity)
+    public static function save(EntityInterface $entity, $process=false)
     {
-        return self::$processor->save($entity);
+        return self::$processor->save($entity, $process);
     }
 
     /**

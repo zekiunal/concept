@@ -40,12 +40,12 @@ class MySql implements HandlerInterface, EntityManagerInterface
      *
      * @return EntityInterface
      */
-    public static function save(EntityInterface $entity, $process=true)
+    public static function save(EntityInterface $entity, $process=false)
     {
         $filter = EntityManager::getEntityFilter($entity);
         $source = EntityManager::getEntitySource($entity);
 
-        if ($process) self::$processor->save($entity);
+        if ($process) self::$processor->save($entity, $process);
 
         $properties = ($filter->getProperties($source));
 

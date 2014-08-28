@@ -20,10 +20,11 @@ class NullHandler extends HandlerAbstract implements HandlerInterface, EntityMan
 
     /**
      * @param EntityInterface $entity
+     * @param boolean $process
      *
      * @return EntityInterface
      */
-    public static function save(EntityInterface $entity)
+    public static function save(EntityInterface $entity, $process=false)
     {
         return false;
     }

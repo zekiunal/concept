@@ -2,6 +2,7 @@
 namespace Concept\Storage\Handler;
 
 use Concept\Entity\EntityInterface;
+use Concept\Entity\Manager\EntityManager;
 use Concept\Entity\Manager\EntityManagerInterface;
 use Concept\Filter\FilterInterface;
 use Concept\Handler\HandlerInterface;
@@ -43,14 +44,15 @@ class GlobalCache implements HandlerInterface, EntityManagerInterface
 
     /**
      * @param EntityInterface $entity
-     * @param                 $source
-     * @param FilterInterface $filter
+     * @param boolean $process
      *
      * @return EntityInterface
      */
-    public static function save(EntityInterface $entity, $source, FilterInterface $filter)
+    public static function save(EntityInterface $entity, $process=false)
     {
-        self::$processor->save($entity, $source, $filter);
+        if ($process) self::$processor->save($entity, $process);
+
+        $filter = EntityManager::getEntityFilter($entity);
 
         $key = CacheQuery::select($filter->setId($entity->getId()));
 
