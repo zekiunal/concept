@@ -14,11 +14,6 @@ class GlobalCache implements CacheInterface
     /**
      * @var array
      */
-    protected $cache;
-
-    /**
-     * @var array
-     */
     private $config = array(
         'prefix' => 'concept_gc'
     );
@@ -29,7 +24,6 @@ class GlobalCache implements CacheInterface
     public function __construct($configuration=array())
     {
         $this->config = $configuration + $this->config;
-        $GLOBALS[$this->config['prefix']] = array();
     }
 
     /**
