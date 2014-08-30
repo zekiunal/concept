@@ -1,5 +1,6 @@
 <?php
 namespace Concept\Tests\Cache;
+
 use Concept\Cache\GlobalCache;
 
 /**
