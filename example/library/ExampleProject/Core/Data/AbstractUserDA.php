@@ -1,7 +1,6 @@
 <?php
 namespace ExampleProject\Core\Data;
 
-use Concept\Entity\EntityInterface;
 use Concept\Entity\Manager\EntityManager;
 use ExampleProject\Custom\Business\User;
 use ExampleProject\Custom\Collection\UserCollection;

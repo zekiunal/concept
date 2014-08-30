@@ -25,6 +25,9 @@ class DataProcess implements  EntityManagerInterface
     {
         $k = 0;
 
+        /**
+         * @var HandlerInterface|false $parent
+         */
         $parent = false;
 
         foreach ($configuration as $key => $value) {
@@ -56,7 +59,7 @@ class DataProcess implements  EntityManagerInterface
     /**
      * @param string    $key
      * @param array     $config
-     * @return          false|EntityManagerInterface
+     * @return          HandlerInterface
      */
     protected function getProcessor($key, $config=array())
     {

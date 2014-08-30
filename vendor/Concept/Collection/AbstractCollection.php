@@ -185,10 +185,12 @@ class AbstractCollection implements CollectionInterface
      *
      * @param string|integer $key   The key/index of the item to set.
      * @param mixed          $value The item to set.
+     * @return boolean
      */
     public function set($key, $value)
     {
         $this->items[$key] = $value;
+        return true;
     }
 
     /**

@@ -73,4 +73,11 @@ interface FilterInterface
      * @param int $offset
      */
     public function setLimit($count=30, $offset=0);
+
+    /**
+     * @param $where
+     * @return FilterInterface
+     */
+    public function addWhere($where);
+
 }

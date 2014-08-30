@@ -1,9 +1,6 @@
 <?php
 namespace Concept\Handler;
 
-use Concept\Entity\EntityInterface;
-use Concept\Filter\FilterInterface;
-
 /**
  * @author      Zeki Unal <zekiunal@gmail.com>
  * @description

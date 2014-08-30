@@ -40,7 +40,7 @@ $user->setFirstName('Zeki');
 $user->setLastName('Unal');
 $user->setPassword('password'.rand());
 $user->setUsername('zekiunal');
-//$user->save();
+$user->save();
 
 //$user->setPassword('password_updated')->save();
 

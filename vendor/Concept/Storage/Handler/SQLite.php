@@ -72,7 +72,7 @@ class SQLite implements HandlerInterface, EntityManagerInterface
         /**
          * fetch data from mysql database
          */
-        $data = self::$driver->runSQL(MySqlQuery::select($filter), $filter->getParameters());
+        $data = self::$driver->runSQL(SQLiteQuery::select($filter), $filter->getParameters());
 
         if ($data) {
             return $data;
@@ -87,7 +87,7 @@ class SQLite implements HandlerInterface, EntityManagerInterface
                  * insert data from mysql database
                  */
                 return array(
-                    self::$driver->insert($data, MySqlQuery::insert($data, $filter->getSource()), $filter->getProperties($filter->getSource()) ,$filter->getSource())
+                    self::$driver->insert($data, SQLiteQuery::insert($data, $filter->getSource()), $filter->getProperties($filter->getSource()) ,$filter->getSource())
                 );
             }
         }
