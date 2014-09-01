@@ -31,8 +31,11 @@ class SQLiteTest extends \PHPUnit_Framework_TestCase
         $entity = new \User();
         $this->assertEmpty($entity->getId());
         $user = $this->handler->save($entity);
+
         $this->assertNotEmpty($entity->getId());
+        $this->assertEquals($user->getId(), $entity->getId());
         $this->assertInstanceOf('User', $user);
+        $this->assertSame($user, $entity);
     }
 
     public function testLoad()
