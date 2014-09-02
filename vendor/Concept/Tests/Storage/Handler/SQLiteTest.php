@@ -7,7 +7,7 @@ use Concept\Storage\Handler\SQLite;
  * @author      Zeki Unal <zekiunal@gmail.com>
  * @description
  *
- * @package     Concept\Tests\Cache
+ * @package     Concept\Tests\Storage\Handler
  * @name        MemcacheTest
  * @version     0.1
  */
