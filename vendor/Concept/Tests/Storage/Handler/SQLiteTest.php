@@ -29,6 +29,7 @@ class SQLiteTest extends \PHPUnit_Framework_TestCase
     public function testSave()
     {
         $entity = new \User();
+        $entity->setUsername('username_handler_save_test_'.rand(1000000, 100000000));
         $this->assertEmpty($entity->getId());
         $user = $this->handler->save($entity);
 
@@ -41,6 +42,7 @@ class SQLiteTest extends \PHPUnit_Framework_TestCase
     public function testLoad()
     {
         $entity = new \User();
+        $entity->setUsername('username_handler_load_test_'.rand(1000000, 100000000));
         $user = $this->handler->save($entity);
 
         $filter = new \UserFilter();

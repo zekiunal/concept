@@ -11,6 +11,8 @@ class User extends \Concept\Business\AbstractBusiness
 {
     protected $user_id;
 
+    protected $username;
+
     /**
      * EntityInterface implementation of convertArray()
      *
@@ -19,7 +21,8 @@ class User extends \Concept\Business\AbstractBusiness
     public function convertArray()
     {
         return array(
-            'user_id' => $this->user_id
+            'user_id' => $this->user_id,
+            'username'=> $this->username
         );
     }
 
@@ -44,6 +47,44 @@ class User extends \Concept\Business\AbstractBusiness
     {
         $this->user_id = $id;
         return $this;
+    }
+
+    /**
+     * @param mixed $user_id
+     *
+     * @return User
+     */
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * @param mixed $username
+     *
+     * @return User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return $this->username;
     }
 }
 
@@ -72,7 +113,8 @@ class UserFilter extends \Concept\Filter\AbstractFilter
         parent::__construct($this->filter);
         $this->setup(
             array(
-                array('user', 'user_id')
+                array('user', 'user_id'),
+                array('user', 'username')
             ),
             'user'
         );
