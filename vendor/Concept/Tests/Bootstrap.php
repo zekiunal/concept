@@ -86,6 +86,148 @@ class User extends \Concept\Business\AbstractBusiness
     {
         return $this->username;
     }
+
+    /**
+     * @return      User
+     */
+    public function save()
+    {
+        self::fireModelEvent('saving');
+        if ($this->user_id)
+        {
+            self::performUpdate();
+        } else {
+            self::performInsert();
+        }
+        self::fireModelEvent('saved');
+        return $this;
+    }
+
+    /**
+     * @return       User
+     */
+    protected function performInsert()
+    {
+        self::fireModelEvent('creating');
+        UserDA::save($this);
+        self::fireModelEvent('created', false);
+        return $this;
+    }
+
+    /**
+     * @return       User
+     */
+    protected function performUpdate()
+    {
+        self::fireModelEvent('updating');
+        UserDA::save($this);
+        self::fireModelEvent('updated', false);
+        return $this;
+    }
+
+    /**
+     * Fire the given event for the model.
+     *
+     * @param  string  $event
+     * @param  bool    $halt
+     * @return mixed
+     */
+    protected function fireModelEvent($event, $halt = true)
+    {
+        if ( ! isset(static::$dispatcher)) {
+            return true;
+        }
+
+        $event = "monorm.model.{$event}: "."user";
+
+        static::$dispatcher->dispatch($event, $this);
+    }
+
+    /**
+     * Register a model event with the dispatcher.
+     *
+     * @param  string  $event
+     * @param  \Closure|string  $callback
+     * @param  int  $priority
+     * @return void
+     */
+    protected static function registerModelEvent($event, $callback, $priority = 0)
+    {
+        $name = 'user';
+        $event_name = "monorm.model.{$event}: {$name}";
+        parent::registerEvent($event_name, $callback, $priority);
+    }
+}
+
+class UserDA
+{
+    /**
+     * @param        int   $user_id
+     *
+     * @return       User|false
+     */
+    public static function loadById($user_id)
+    {
+        $filter = new UserFilter();
+        $filter->setUserId($user_id);
+        $data = \Concept\Entity\Manager\EntityManager::load($filter);
+        $result = self::bind($data);
+        if($result->count() > 0) {
+            return $result->get(0);
+        }
+        return false;
+    }
+
+    /**
+     * @param        $filter
+     *
+     * @return       UserCollection
+     */
+    public static function load($filter)
+    {
+        return self::bind(\Concept\Entity\Manager\EntityManager::load($filter));
+    }
+
+    /**
+     * @param User $entity
+     *
+     * @return User
+     */
+    public static function save(User $entity)
+    {
+        return \Concept\Entity\Manager\EntityManager::save($entity, 'user');
+    }
+
+    /**
+     * @param  array          $array
+     * @return UserCollection
+     */
+    public static function bind($array)
+    {
+        $collection = new UserCollection();
+        foreach ($array as $data) {
+            $collection->add(self::create($data));
+        }
+        return $collection;
+
+    }
+
+    /**
+     * @param  array $data
+     * @return User
+     */
+    public static function create(array $data)
+    {
+        $entity = new User();
+        $entity->bind($data);
+
+        return $entity;
+    }
+}
+
+class UserCollection extends \Concept\Collection\AbstractCollection
+{
+
 }
 
 class UserFilter extends \Concept\Filter\AbstractFilter

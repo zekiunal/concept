@@ -1,5 +1,7 @@
 <?php
 namespace Concept\Tests\Business;
+use Concept\Entity\Manager\EntityManager;
+use Concept\Storage\Handler\DataProcess;
 
 /**
  * @author      Zeki Unal <zekiunal@gmail.com>
@@ -18,6 +20,18 @@ class BusinessTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        /**
+         * Data handler set.
+         */
+        $sql_configurations = array(array(
+            'engine'   => 'sqlite',
+            'database' => 'test.sqlite'),3);
+        $processor_configurations = array(
+            'sqlite'           => $sql_configurations
+        );
+        $processor = new DataProcess($processor_configurations);
+        EntityManager::setHandler($processor);
+
         $this->user = new \User();
     }
 
@@ -47,5 +61,11 @@ class BusinessTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($data, $this->user->convertArray());
     }
 
-
+    public function testSave()
+    {
+        $this->user->setUsername('username');
+        $this->assertEmpty($this->user->getId());
+        $this->user->save();
+        $this->assertNotEmpty($this->user->getId());
+    }
 }
