@@ -28,14 +28,25 @@ class SQLiteDriverTest extends \PHPUnit_Framework_TestCase
 
     public function testInsert()
     {
-        $data = array('user_id' => null);
-        $sql = 'INSERT INTO `user` (`user_id`) VALUES (:user_id)';
-        $properties = array(array('user','user_id'));
+        $data = array(
+            'user_id' => null,
+            'username' => 'username_'.rand(1,10000)
+        );
+
+
+        $sql = 'INSERT INTO `user` (`user_id`, `username`) VALUES (:user_id, :username)';
+
+        $properties = array(
+            array('user','user_id'),
+            array('user','username')
+        );
+
         $source = 'user';
         $result = $this->driver->insert($data, $sql, $properties, $source);
 
         $this->assertArrayHasKey('user_id', $result);
         $this->assertNotEmpty($result['user_id']);
+        $this->assertEquals($result['username'], $data['username']);
     }
 
     public function testUpdate()
@@ -58,6 +69,5 @@ class SQLiteDriverTest extends \PHPUnit_Framework_TestCase
         $result = $this->driver->runSQL($sql, array());
 
         $this->assertGreaterThan(0, count($result));
-
     }
 }
