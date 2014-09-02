@@ -10,5 +10,8 @@
         <testsuite name="Driver Test Suite">
             <directory>./Database</directory>
         </testsuite>
+        <testsuite name="Business Test Suite">
+            <directory>./Business</directory>
+        </testsuite>
     </testsuites>
 </phpunit>
