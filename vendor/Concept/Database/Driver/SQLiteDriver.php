@@ -54,7 +54,6 @@ class SQLiteDriver
     public function insert(array $data, $statement, array $properties, $source)
     {
         $statement = $this->connection->prepare($statement);
-
         foreach ($properties as $value) {
             $statement->bindValue(':'.$value[1], $data[$value[1]]);
         }
