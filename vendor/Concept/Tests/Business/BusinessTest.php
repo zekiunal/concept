@@ -1,5 +1,6 @@
 <?php
 namespace Concept\Tests\Business;
+
 use Concept\Entity\Manager\EntityManager;
 use Concept\Storage\Handler\DataProcess;
 
