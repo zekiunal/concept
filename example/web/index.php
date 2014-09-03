@@ -31,6 +31,17 @@ $processor_configurations = array(
 $processor = new \Concept\Storage\Handler\DataProcess($processor_configurations);
 \Concept\Entity\Manager\EntityManager::setHandler($processor);
 
+
+User::created(function(){echo "created<br>";});
+User::saved(function(){ echo "saved<br>";});
+User::updated(function(){echo "updated<br>";});
+
+\Concept\Database\Driver\MySqlDriver::inserted(function(\Concept\Database\Driver\MySqlDriver $driver) {
+    echo $driver->statement."<br>";
+    var_dump($driver->data);
+    var_dump($driver->properties);
+});
+
 /**
  * Example
  **/
