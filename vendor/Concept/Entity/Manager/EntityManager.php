@@ -36,9 +36,9 @@ class EntityManager implements EntityManagerInterface
     }
 
     /**
-     * @param        FilterInterface $filter
+     * @param   FilterInterface $filter
      *
-     * @return       array|false
+     * @return  array|false
      */
     public static function load(FilterInterface $filter)
     {
