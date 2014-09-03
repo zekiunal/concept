@@ -70,20 +70,23 @@ class MySql
     /**
      * @param   string $source
      * @param   array  $properties
+     * @param   array  $data
      *
      * @return  string
      */
-    public static function insert($source, $properties=array())
+    public static function insert($source, $properties=array(), $data)
     {
 
         $statement = "INSERT INTO `" . $source . "` SET ";
         $k=0;
         foreach($properties as $value) {
-            if($k > 0) {
-                $statement .= ', ';
+            if($data[$value[1]]) {
+                if($k > 0) {
+                    $statement .= ', ';
+                }
+                $statement .= '`' . $source . '`.`' . $value[1] .'` = :'. $value[1] .'';
+                $k++;
             }
-            $statement .= '`' . $source . '`.`' . $value[1] .'` = :'. $value[1] .'';
-            $k++;
         }
 
         return $statement;
@@ -91,20 +94,24 @@ class MySql
 
     /**
      * @param   string $source
-     * @param   array $properties
+     * @param   array  $properties
+     * @param   array  $data
+     *
      * @return  string
      */
-    public static function update($source, $properties)
+    public static function update($source, $properties, $data)
     {
         $statement = "UPDATE `" . $source . "` SET ";
         $k=0;
 
         foreach($properties as $value) {
-            if($k > 0) {
-                $statement .= ', ';
+            if($data[$value[1]]) {
+                if($k > 0) {
+                    $statement .= ', ';
+                }
+                $statement .= '`' . $source . '`.`' . $value[1] .'` = :'. $value[1] .'';
+                $k++;
             }
-            $statement .= '`' . $source . '`.`' . $value[1] .'` = :'. $value[1] .'';
-            $k++;
         }
 
         $statement .= ' WHERE `' . $source . '`.`' . $source .'_id` = :'. $source .'_id';

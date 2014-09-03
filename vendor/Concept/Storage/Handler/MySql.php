@@ -53,8 +53,8 @@ class MySql implements HandlerInterface, EntityManagerInterface
 
         $result = (
         ($entity->getId() === 0 || $entity->getId() === null) ?
-            self::$driver->insert($data, MySqlQuery::insert($source, $properties), $properties, $source) :
-            self::$driver->update($data, MySqlQuery::update($source, $properties), $properties)
+            self::$driver->insert($data, MySqlQuery::insert($source, $properties, $data), $properties, $source) :
+            self::$driver->update($data, MySqlQuery::update($source, $properties, $data), $properties)
         );
 
         $entity->setId($result[$source.'_id']);

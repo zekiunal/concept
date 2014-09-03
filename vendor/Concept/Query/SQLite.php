@@ -70,30 +70,35 @@ class SQLite
     /**
      * @param   string $source
      * @param   array  $properties
+     * @param   array  $data
      *
      * @return  string
      */
-    public static function insert($source, $properties=array())
+    public static function insert($source, $properties=array(), $data)
     {
 
         $statement = "INSERT INTO `" . $source . "` (";
         $k=0;
         foreach($properties as $value) {
-            if($k > 0) {
-                $statement .= ', ';
+            if($data[$value[1]]) {
+                if($k > 0) {
+                    $statement .= ', ';
+                }
+                $statement .= '`' . $value[1] .'`';
+                $k++;
             }
-            $statement .= '`' . $value[1] .'`';
-            $k++;
         }
         $statement .= ') VALUES (';
 
         $k=0;
         foreach($properties as $value) {
-            if($k > 0) {
-                $statement .= ', ';
+            if($data[$value[1]]) {
+                if($k > 0) {
+                    $statement .= ', ';
+                }
+                $statement .= ':'. $value[1] .'';
+                $k++;
             }
-            $statement .= ':'. $value[1] .'';
-            $k++;
         }
         $statement .= ')';
 
@@ -102,20 +107,24 @@ class SQLite
 
     /**
      * @param   string $source
-     * @param   array $properties
+     * @param   array  $properties
+     * @param   array  $data
+     *
      * @return  string
      */
-    public static function update($source, $properties)
+    public static function update($source, $properties=array(), $data)
     {
         $statement = "UPDATE `" . $source . "` SET ";
-        $k=0;
 
+        $k=0;
         foreach($properties as $value) {
-            if($k > 0) {
-                $statement .= ', ';
+            if($data[$value[1]]) {
+                if($k > 0) {
+                    $statement .= ', ';
+                }
+                $statement .= '`' . $value[1] .'` = :'. $value[1] .'';
+                $k++;
             }
-            $statement .= '`' . $value[1] .'` = :'. $value[1] .'';
-            $k++;
         }
 
         $statement .= ' WHERE `' . $source . '`.`' . $source .'_id` = :'. $source .'_id';
