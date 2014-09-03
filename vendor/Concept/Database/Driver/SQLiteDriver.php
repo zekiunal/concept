@@ -11,7 +11,7 @@ use PDO;
  * @name        SQLiteDriver
  * @version     0.1
  */
-class SQLiteDriver
+class SQLiteDriver extends AbstractDriver
 {
     /**
      * @var \PDO
@@ -53,15 +53,30 @@ class SQLiteDriver
      */
     public function insert(array $data, $statement, array $properties, $source)
     {
+        $start_time = microtime(TRUE);
+        $this->data = $data;
+        $this->source = $source;
+        $this->properties = $properties;
+        $this->statement = $statement;
+
+        self::fireModelEvent('inserting');
+
         $statement = $this->connection->prepare($statement);
-        foreach ($properties as $value) {
-            $statement->bindValue(':'.$value[1], $data[$value[1]]);
-        }
+
+        $this->bind($statement, $properties, $data);
 
         $statement->execute();
-        $key = $source.'_id';
-        $data[$key] = $this->connection->lastInsertId();
+
+        $this->time = microtime(TRUE) - $start_time;
+
+        $data[$source.'_id'] = $this->connection->lastInsertId();
+
         $statement->closeCursor();
+
+        $this->data = $data;
+
+        self::fireModelEvent('inserted');
+
         return $data;
     }
 
@@ -73,15 +88,73 @@ class SQLiteDriver
      */
     public function update($data, $statement, $properties)
     {
+        $start_time = microtime(TRUE);
+        $this->data = $data;
+        $this->source = $properties[0][0];
+        $this->properties = $properties;
+        $this->statement = $statement;
+
+        self::fireModelEvent('updating');
+
         $statement = $this->connection->prepare($statement);
 
-        foreach ($properties as $value) {
-            $statement->bindValue(':'.$value[1], $data[$value[1]]);
-        }
+        $this->bind($statement, $properties, $data);
 
         $statement->execute();
+
+        $this->time = microtime(TRUE) - $start_time;
+
         $statement->closeCursor();
 
+        $this->data = $data;
+
+        self::fireModelEvent('updated');
+
         return $data;
+    }
+
+    /**
+     * @param \PDOStatement $statement
+     * @param  array        $properties
+     * @param  array        $data
+     */
+    protected function bind(\PDOStatement $statement, array $properties, array $data)
+    {
+        foreach ($properties as $value) {
+            if($data[$value[1]]) {
+                $statement->bindValue(':'.$value[1], $data[$value[1]]);
+            }
+        }
+    }
+
+    /**
+     * Fire the given event for the model.
+     *
+     * @param  string  $event
+     * @param  bool    $halt
+     * @return mixed
+     */
+    protected function fireModelEvent($event, $halt = true)
+    {
+        if ( ! isset(static::$dispatcher)) {
+            return true;
+        }
+
+        $event = "monorm.sqllite_driver.{$event}";
+        static::$dispatcher->dispatch($event, $this);
+    }
+
+    /**
+     * Register a model event with the dispatcher.
+     *
+     * @param  string  $event
+     * @param  \Closure|string  $callback
+     * @param  int  $priority
+     * @return void
+     */
+    protected static function registerModelEvent($event, $callback, $priority = 0)
+    {
+        $event_name = "monorm.sqllite_driver.{$event}";
+        self::registerEvent($event_name, $callback, $priority = 0);
     }
 }
