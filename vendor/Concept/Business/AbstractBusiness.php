@@ -2,6 +2,7 @@
 namespace Concept\Business;
 
 use Concept\Entity\EntityInterface;
+use Concept\EventDispatcher\EventDispatcher;
 use Concept\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -89,16 +90,20 @@ abstract class AbstractBusiness implements EntityInterface
      */
     public static function getEventDispatcher()
     {
+        if ( ! isset(static::$dispatcher)) {
+            static::setEventDispatcher(new EventDispatcher());
+        }
+
         return static::$dispatcher;
     }
 
     /**
      * Set the event dispatcher instance.
      *
-     * @param   $dispatcher
+     * @param  EventDispatcherInterface $dispatcher
      * @return void
      */
-    public static function setEventDispatcher($dispatcher)
+    public static function setEventDispatcher(EventDispatcherInterface $dispatcher)
     {
         static::$dispatcher = $dispatcher;
     }
