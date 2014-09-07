@@ -68,5 +68,6 @@ class BusinessTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($this->user->getId());
         $this->user->save();
         $this->assertNotEmpty($this->user->getId());
+        $this->assertEquals('username', $this->user->getUsername());
     }
 }
