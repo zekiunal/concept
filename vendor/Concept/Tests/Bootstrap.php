@@ -166,9 +166,7 @@ class User extends \Concept\Business\AbstractBusiness
         if (!isset(static::$dispatcher)) {
             return true;
         }
-
         $event = "monorm.model.{$event}: " . "user";
-
         static::$dispatcher->dispatch($event, $this);
     }
 

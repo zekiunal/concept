@@ -16,27 +16,107 @@ abstract class AbstractDriver
     /**
      * @var string
      */
-    public $time;
+    protected $time;
 
     /**
      * @var string
      */
-    public $statement;
+    protected $statement;
 
     /**
      * @var array
      */
-    public $data;
+    protected $data;
 
     /**
      * @var string
      */
-    public $source;
+    protected $source;
 
     /**
      * @var array
      */
-    public $properties;
+    protected $properties;
+
+    /**
+     * @return string
+     */
+    public function getTime()
+    {
+        return $this->time;
+    }
+
+    /**
+     * @param string $time
+     */
+    public function setTime($time)
+    {
+        $this->time = $time;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatement()
+    {
+        return $this->statement;
+    }
+
+    /**
+     * @param string $statement
+     */
+    public function setStatement($statement)
+    {
+        $this->statement = $statement;
+    }
+
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @param array $data
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSource()
+    {
+        return $this->source;
+    }
+
+    /**
+     * @param string $source
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
+    }
+
+    /**
+     * @return array
+     */
+    public function getProperties()
+    {
+        return $this->properties;
+    }
+
+    /**
+     * @param array $properties
+     */
+    public function setProperties($properties)
+    {
+        $this->properties = $properties;
+    }
 
     /**
      * Register a model event with the dispatcher.

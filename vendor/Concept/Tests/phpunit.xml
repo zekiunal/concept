@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit colors="true" bootstrap="Bootstrap.php">
     <testsuites>
-        <testsuite name="Cache Test Suite">
-            <directory>./Cache</directory>
-        </testsuite>
-        <!--
 
-
-
-<testsuite name="Storage Test Suite">
-            <directory>./Storage</directory>
-        </testsuite>
         <testsuite name="Driver Test Suite">
             <directory>./Database</directory>
         </testsuite>
+
+        <testsuite name="Cache Test Suite">
+            <directory>./Cache</directory>
+        </testsuite>
+
+        <testsuite name="Storage Test Suite">
+            <directory>./Storage</directory>
+        </testsuite>
+
+        <!--
+
+
         <testsuite name="Query Test Suite">
             <directory>./Query</directory>
         </testsuite>
-        -->
+
         <testsuite name="Business Test Suite">
             <directory>./Business</directory>
         </testsuite>
+        -->
 
     </testsuites>
 </phpunit>

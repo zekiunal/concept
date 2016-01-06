@@ -28,6 +28,7 @@ class SQLiteDriverTest extends \PHPUnit_Framework_TestCase
         $this->driver = new SQLiteDriver($configuration);
     }
 
+    /*
     public function testInsert()
     {
         $data = array(
@@ -93,5 +94,32 @@ class SQLiteDriverTest extends \PHPUnit_Framework_TestCase
         $statement = SQLite::delete($source);
 
         $this->driver->delete($data, $statement, $properties, $source);
+    }
+*/
+    public function testEvents()
+    {
+        SQLiteDriver::inserted(function (SQLiteDriver $event) {
+            echo 'inserted' . " " .
+                $event->getStatement() . " " .
+                $event->getTime() . " " .
+                json_encode($event->getData()) .
+                json_encode($event->getProperties()) .
+                "\n";
+        });
+
+        $data = array(
+            'user_id'  => null,
+            'username' => 'username_' . rand(1, 10000)
+        );
+
+        $sql = 'INSERT INTO `user` (`user_id`, `username`) VALUES (:user_id, :username)';
+
+        $properties = array(
+            array('user', 'user_id'),
+            array('user', 'username')
+        );
+
+        $source = 'user';
+        $result = $this->driver->insert($data, $sql, $properties, $source);
     }
 }
