@@ -20,9 +20,14 @@ class SQLiteDriver extends AbstractDriver
 
     public function __construct($configuration = array())
     {
+        $charset = 'UTF-8';
+
+        if (isset($configuration['charset'])) {
+            $charset = $configuration['charset'];
+        }
         $engine = $configuration['engine'] . ':';
         $db = new PDO($engine . $configuration['database']);
-        $db->query('SET NAMES UTF8');
+        $db->query('SET NAMES ' . $charset);
         $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         $this->connection = $db;
     }
@@ -156,7 +161,6 @@ class SQLiteDriver extends AbstractDriver
             }
         }
     }
-
 
 
     /**
