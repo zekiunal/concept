@@ -20,7 +20,7 @@ interface EntityManagerInterface
      *
      * @return EntityInterface
      */
-    public static function save(EntityInterface $entity, $process=true);
+    public static function save(EntityInterface $entity, $process = true);
 
     /**
      * @param        FilterInterface $filter

@@ -23,7 +23,7 @@ class Redis implements CacheInterface
 
     /**
      * @param string $key
-     * @param mixed  $data
+     * @param mixed $data
      *
      * @return mixed
      */

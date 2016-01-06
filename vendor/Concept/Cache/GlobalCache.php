@@ -21,7 +21,7 @@ class GlobalCache implements CacheInterface
     /**
      * @param array $configuration
      */
-    public function __construct($configuration=array())
+    public function __construct($configuration = array())
     {
         $this->config = $configuration + $this->config;
     }
@@ -84,7 +84,7 @@ class GlobalCache implements CacheInterface
     /**
      * Get the data for $key, persisted by setPersistentData()
      *
-     * @param string $key The key of the data to retrieve
+     * @param string $key      The key of the data to retrieve
      * @param boolean $default The default value to return if $key is not found
      *
      * @return mixed

@@ -30,7 +30,7 @@ class EntityManager implements EntityManagerInterface
      *
      * @return EntityInterface
      */
-    public static function save(EntityInterface $entity, $process=true)
+    public static function save(EntityInterface $entity, $process = true)
     {
         return self::$processor->save($entity);
     }
@@ -63,7 +63,7 @@ class EntityManager implements EntityManagerInterface
 
     public static function getPrimaryKey($entity)
     {
-        return self::get_class_name($entity)."Id";
+        return self::get_class_name($entity) . "Id";
     }
 
     /**
@@ -72,7 +72,7 @@ class EntityManager implements EntityManagerInterface
      */
     public static function getEntityFilter($entity)
     {
-        $class = str_replace('Business', 'Filter', get_class($entity)).'Filter';
+        $class = str_replace('Business', 'Filter', get_class($entity)) . 'Filter';
         return new $class();
     }
 
@@ -87,7 +87,8 @@ class EntityManager implements EntityManagerInterface
         return $class_name;
     }
 
-    private static function from_camel_case($input) {
+    private static function from_camel_case($input)
+    {
         preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $input, $matches);
         $ret = $matches[0];
         foreach ($ret as &$match) {

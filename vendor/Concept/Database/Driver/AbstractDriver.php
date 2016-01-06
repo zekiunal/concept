@@ -41,14 +41,14 @@ abstract class AbstractDriver
     /**
      * Register a model event with the dispatcher.
      *
-     * @param  string  $event
-     * @param  \Closure|string  $callback
-     * @param  int  $priority
+     * @param  string $event
+     * @param  \Closure|string $callback
+     * @param  int $priority
      * @return void
      */
     protected static function registerEvent($event, $callback, $priority = 0)
     {
-        if ( ! isset(static::$dispatcher)) {
+        if (!isset(static::$dispatcher)) {
             static::setEventDispatcher(new EventDispatcher());
         }
 
@@ -73,7 +73,7 @@ abstract class AbstractDriver
      */
     public static function getEventDispatcher()
     {
-        if ( ! isset(static::$dispatcher)) {
+        if (!isset(static::$dispatcher)) {
             static::setEventDispatcher(new EventDispatcher());
         }
 
@@ -83,13 +83,13 @@ abstract class AbstractDriver
     /**
      * Fire the given event for the model.
      *
-     * @param  string  $event
-     * @param  bool    $halt
+     * @param  string $event
+     * @param  bool $halt
      * @return mixed
      */
     protected function fireModelEvent($event, $halt = true)
     {
-        if ( ! isset(static::$dispatcher)) {
+        if (!isset(static::$dispatcher)) {
             return true;
         }
 
@@ -100,7 +100,7 @@ abstract class AbstractDriver
     /**
      * Register a inserting event with the dispatcher.
      *
-     * @param  \Closure|string  $callback
+     * @param  \Closure|string $callback
      * @param int $priority
      * @return void
      */
@@ -112,7 +112,7 @@ abstract class AbstractDriver
     /**
      * Register a inserted event with the dispatcher.
      *
-     * @param  \Closure|string  $callback
+     * @param  \Closure|string $callback
      * @param int $priority
      * @return void
      */
@@ -124,7 +124,7 @@ abstract class AbstractDriver
     /**
      * Register a updated event with the dispatcher.
      *
-     * @param  \Closure|string  $callback
+     * @param  \Closure|string $callback
      * @param int $priority
      * @return void
      */
@@ -136,7 +136,7 @@ abstract class AbstractDriver
     /**
      * Register a updating event with the dispatcher.
      *
-     * @param  \Closure|string  $callback
+     * @param  \Closure|string $callback
      * @param int $priority
      * @return void
      */

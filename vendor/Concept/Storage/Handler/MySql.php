@@ -29,7 +29,11 @@ class MySql implements HandlerInterface, EntityManagerInterface
      */
     protected static $driver;
 
-    public function __construct($configuration=array())
+    /**
+     * MySql constructor.
+     * @param array $configuration
+     */
+    public function __construct($configuration = array())
     {
         self::$driver = new MySqlDriver($configuration);
     }
@@ -40,7 +44,7 @@ class MySql implements HandlerInterface, EntityManagerInterface
      *
      * @return EntityInterface
      */
-    public static function save(EntityInterface $entity, $process=false)
+    public static function save(EntityInterface $entity, $process = false)
     {
         $filter = EntityManager::getEntityFilter($entity);
         $source = EntityManager::getEntitySource($entity);
@@ -57,7 +61,7 @@ class MySql implements HandlerInterface, EntityManagerInterface
             self::$driver->update($data, MySqlQuery::update($source, $properties, $data), $properties)
         );
 
-        $entity->setId($result[$source.'_id']);
+        $entity->setId($result[$source . '_id']);
 
         return $entity;
     }
@@ -82,12 +86,12 @@ class MySql implements HandlerInterface, EntityManagerInterface
              */
             $data = self::$processor->load($filter);
 
-            if($data) {
+            if ($data) {
                 /**
                  * insert data from mysql database
                  */
                 return array(
-                    self::$driver->insert($data, MySqlQuery::insert($data, $filter->getSource()), $filter->getProperties($filter->getSource()) ,$filter->getSource())
+                    self::$driver->insert($data, MySqlQuery::insert($data, $filter->getSource()), $filter->getProperties($filter->getSource()), $filter->getSource())
                 );
             }
         }

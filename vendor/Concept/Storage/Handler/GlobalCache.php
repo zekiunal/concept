@@ -37,7 +37,7 @@ class GlobalCache implements HandlerInterface, EntityManagerInterface
         self::$processor = $processor;
     }
 
-    public function __construct($configuration=array())
+    public function __construct($configuration = array())
     {
         self::$cache = new CacheDrive($configuration);
     }
@@ -48,7 +48,7 @@ class GlobalCache implements HandlerInterface, EntityManagerInterface
      *
      * @return EntityInterface
      */
-    public static function save(EntityInterface $entity, $process=false)
+    public static function save(EntityInterface $entity, $process = false)
     {
         if ($process) self::$processor->save($entity, $process);
 

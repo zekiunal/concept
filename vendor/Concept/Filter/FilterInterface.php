@@ -12,8 +12,8 @@ namespace Concept\Filter;
 interface FilterInterface
 {
     /**
-     * @param string  $column_name
-     * @param string  $value
+     * @param string $column_name
+     * @param string $value
      * @param boolean $equal
      *
      * @return FilterInterface
@@ -72,7 +72,7 @@ interface FilterInterface
      * @param int $count
      * @param int $offset
      */
-    public function setLimit($count=30, $offset=0);
+    public function setLimit($count = 30, $offset = 0);
 
     /**
      * @param $where

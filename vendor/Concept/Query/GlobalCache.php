@@ -1,5 +1,6 @@
 <?php
 namespace Concept\Query;
+
 use Concept\Filter\FilterInterface;
 
 /**
@@ -19,6 +20,6 @@ class GlobalCache
      */
     public static function select(FilterInterface $filter)
     {
-        return md5($filter->getSource().'_'.$filter->getId().'_'.json_encode($filter->getParameters()));
+        return md5($filter->getSource() . '_' . $filter->getId() . '_' . json_encode($filter->getParameters()));
     }
 }

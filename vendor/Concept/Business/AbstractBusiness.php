@@ -59,8 +59,8 @@ abstract class AbstractBusiness implements EntityInterface
     public function bind($data)
     {
         $keys = array_keys($data);
-        foreach($keys as $value) {
-            if(isset($data[$value]) and ($this->$value != $data[$value])) {
+        foreach ($keys as $value) {
+            if (isset($data[$value]) and ($this->$value != $data[$value])) {
                 $this->$value = $data[$value];
             }
         }
@@ -90,7 +90,7 @@ abstract class AbstractBusiness implements EntityInterface
      */
     public static function getEventDispatcher()
     {
-        if ( ! isset(static::$dispatcher)) {
+        if (!isset(static::$dispatcher)) {
             static::setEventDispatcher(new EventDispatcher());
         }
 
@@ -121,14 +121,14 @@ abstract class AbstractBusiness implements EntityInterface
     /**
      * Register a model event with the dispatcher.
      *
-     * @param  string  $event
-     * @param  \Closure|string  $callback
-     * @param  int  $priority
+     * @param  string $event
+     * @param  \Closure|string $callback
+     * @param  int $priority
      * @return void
      */
-    protected static function registerEvent($event, $callback, $priority=0)
+    protected static function registerEvent($event, $callback, $priority = 0)
     {
-        if ( ! isset(static::$dispatcher)) {
+        if (!isset(static::$dispatcher)) {
             static::setEventDispatcher(new EventDispatcher());
         }
 

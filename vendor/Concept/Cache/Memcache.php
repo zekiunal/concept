@@ -20,13 +20,14 @@ class Memcache implements CacheInterface
      * @param     $host
      * @param int $port
      */
-    public function connect($host, $port=11211)
+    public function connect($host, $port = 11211)
     {
         try {
             $this->cache = new \Memcache();
             $this->cache->connect($host, $port);
         } catch (\Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";exit;
+            echo 'Caught exception: ', $e->getMessage(), "\n";
+            exit;
         }
     }
 
@@ -42,7 +43,7 @@ class Memcache implements CacheInterface
 
     /**
      * @param string $key
-     * @param mixed  $data
+     * @param mixed $data
      *
      * @return mixed
      */

@@ -11,11 +11,11 @@ class MySqlDriver extends AbstractDriver
      */
     protected $connection;
 
-    public function __construct($configuration=array())
+    public function __construct($configuration = array())
     {
-        $engine = $configuration['engine'].':dbname=';
+        $engine = $configuration['engine'] . ':dbname=';
         $db = new \PDO(
-            $engine.$configuration['database'].";host=".$configuration['hostname'],
+            $engine . $configuration['database'] . ";host=" . $configuration['hostname'],
             $configuration['username'],
             $configuration['password']
         );
@@ -26,13 +26,13 @@ class MySqlDriver extends AbstractDriver
     }
 
     /**
-     * @param  string  $statement
-     * @param  array   $parameters
+     * @param  string $statement
+     * @param  array $parameters
      * @param  integer $method
      *
      * @return array
      */
-    public function runSQL($statement, $parameters, $method=\PDO::FETCH_ASSOC)
+    public function runSQL($statement, $parameters, $method = \PDO::FETCH_ASSOC)
     {
         $stmt = $this->connection->prepare($statement);
         $stmt->execute($parameters);
@@ -67,7 +67,7 @@ class MySqlDriver extends AbstractDriver
 
         $this->time = microtime(TRUE) - $start_time;
 
-        $data[$source.'_id'] = $this->connection->lastInsertId();
+        $data[$source . '_id'] = $this->connection->lastInsertId();
 
         $statement->closeCursor();
 
@@ -113,14 +113,14 @@ class MySqlDriver extends AbstractDriver
 
     /**
      * @param \PDOStatement $statement
-     * @param  array        $properties
-     * @param  array        $data
+     * @param  array $properties
+     * @param  array $data
      */
     protected function bind(\PDOStatement $statement, array $properties, array $data)
     {
         foreach ($properties as $value) {
-            if($data[$value[1]]) {
-                $statement->bindValue(':'.$value[1], $data[$value[1]]);
+            if ($data[$value[1]]) {
+                $statement->bindValue(':' . $value[1], $data[$value[1]]);
             }
         }
     }
@@ -128,13 +128,13 @@ class MySqlDriver extends AbstractDriver
     /**
      * Fire the given event for the model.
      *
-     * @param  string  $event
-     * @param  bool    $halt
+     * @param  string $event
+     * @param  bool $halt
      * @return mixed
      */
     protected function fireModelEvent($event, $halt = true)
     {
-        if ( ! isset(static::$dispatcher)) {
+        if (!isset(static::$dispatcher)) {
             return true;
         }
 
@@ -145,9 +145,9 @@ class MySqlDriver extends AbstractDriver
     /**
      * Register a model event with the dispatcher.
      *
-     * @param  string  $event
-     * @param  \Closure|string  $callback
-     * @param  int  $priority
+     * @param  string $event
+     * @param  \Closure|string $callback
+     * @param  int $priority
      * @return void
      */
     protected static function registerModelEvent($event, $callback, $priority = 0)

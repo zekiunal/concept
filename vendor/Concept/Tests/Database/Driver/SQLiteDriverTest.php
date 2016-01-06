@@ -29,15 +29,15 @@ class SQLiteDriverTest extends \PHPUnit_Framework_TestCase
     public function testInsert()
     {
         $data = array(
-            'user_id' => null,
-            'username' => 'username_'.rand(1,10000)
+            'user_id'  => null,
+            'username' => 'username_' . rand(1, 10000)
         );
 
         $sql = 'INSERT INTO `user` (`user_id`, `username`) VALUES (:user_id, :username)';
 
         $properties = array(
-            array('user','user_id'),
-            array('user','username')
+            array('user', 'user_id'),
+            array('user', 'username')
         );
 
         $source = 'user';
@@ -51,13 +51,13 @@ class SQLiteDriverTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdate()
     {
-        $result = $this->driver->runSQL('SELECT * FROM user',array());
-        $user = $result[rand(0,count($result)-1)];
+        $result = $this->driver->runSQL('SELECT * FROM user', array());
+        $user = $result[rand(0, count($result) - 1)];
 
-        $data = array('user_id' => $user['user_id'], 'username'=>'username_driver_update_test_random_updated');
-        $sql = 'UPDATE `user` SET `username` = :username WHERE `user_id` = :user_id' ;
+        $data = array('user_id' => $user['user_id'], 'username' => 'username_driver_update_test_random_updated');
+        $sql = 'UPDATE `user` SET `username` = :username WHERE `user_id` = :user_id';
 
-        $properties = array(array('user','user_id'), array('user', 'username'));
+        $properties = array(array('user', 'user_id'), array('user', 'username'));
         $source = 'user';
         $result = $this->driver->update($data, $sql, $properties, $source);
 

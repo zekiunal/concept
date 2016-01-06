@@ -29,7 +29,7 @@ interface EventDispatcherInterface
      * @param int $priority
      * @return mixed
      */
-    public function listen($event, $callback, $priority=0);
+    public function listen($event, $callback, $priority = 0);
 
     /**
      * @param $event

@@ -19,8 +19,7 @@ class EventDispatcher implements EventDispatcherInterface
     {
         $listeners = $subscriber->getSubscribedEvents();
 
-        foreach ($listeners as $event => $listener)
-        {
+        foreach ($listeners as $event => $listener) {
             // Add the subscribed function as an event
             $this->listen($event, array($subscriber, $listener));
         }
@@ -49,8 +48,7 @@ class EventDispatcher implements EventDispatcherInterface
             return true;
         }
 
-        foreach ($this->listeners[$event] as $listener)
-        {
+        foreach ($this->listeners[$event] as $listener) {
             call_user_func_array($listener, array($param));
         }
 

@@ -21,8 +21,8 @@ class User extends \Concept\Business\AbstractBusiness
     public function convertArray()
     {
         return array(
-            'user_id' => $this->user_id,
-            'username'=> $this->username
+            'user_id'  => $this->user_id,
+            'username' => $this->username
         );
     }
 
@@ -93,8 +93,7 @@ class User extends \Concept\Business\AbstractBusiness
     public function save()
     {
         self::fireModelEvent('saving');
-        if ($this->user_id)
-        {
+        if ($this->user_id) {
             self::performUpdate();
         } else {
             self::performInsert();
@@ -128,17 +127,17 @@ class User extends \Concept\Business\AbstractBusiness
     /**
      * Fire the given event for the model.
      *
-     * @param  string  $event
-     * @param  bool    $halt
+     * @param  string $event
+     * @param  bool $halt
      * @return mixed
      */
     protected function fireModelEvent($event, $halt = true)
     {
-        if ( ! isset(static::$dispatcher)) {
+        if (!isset(static::$dispatcher)) {
             return true;
         }
 
-        $event = "monorm.model.{$event}: "."user";
+        $event = "monorm.model.{$event}: " . "user";
 
         static::$dispatcher->dispatch($event, $this);
     }
@@ -146,9 +145,9 @@ class User extends \Concept\Business\AbstractBusiness
     /**
      * Register a model event with the dispatcher.
      *
-     * @param  string  $event
-     * @param  \Closure|string  $callback
-     * @param  int  $priority
+     * @param  string $event
+     * @param  \Closure|string $callback
+     * @param  int $priority
      * @return void
      */
     protected static function registerModelEvent($event, $callback, $priority = 0)
@@ -162,7 +161,7 @@ class User extends \Concept\Business\AbstractBusiness
 class UserDA
 {
     /**
-     * @param        int   $user_id
+     * @param        int $user_id
      *
      * @return       User|false
      */
@@ -172,7 +171,7 @@ class UserDA
         $filter->setUserId($user_id);
         $data = \Concept\Entity\Manager\EntityManager::load($filter);
         $result = self::bind($data);
-        if($result->count() > 0) {
+        if ($result->count() > 0) {
             return $result->get(0);
         }
         return false;
@@ -199,7 +198,7 @@ class UserDA
     }
 
     /**
-     * @param  array          $array
+     * @param  array $array
      * @return UserCollection
      */
     public static function bind($array)
@@ -249,7 +248,7 @@ class UserFilter extends \Concept\Filter\AbstractFilter
      */
     protected $user_id;
 
-    public function __construct($filter=null)
+    public function __construct($filter = null)
     {
         $this->filter = ($filter != null) ? $filter : $this;
         parent::__construct($this->filter);
@@ -268,7 +267,7 @@ class UserFilter extends \Concept\Filter\AbstractFilter
      * @param boolean $equal
      * @return UserFilter
      */
-    public function setUserId($user_id, $equal=true)
+    public function setUserId($user_id, $equal = true)
     {
         $this->user_id = $user_id;
         $this->filter->addWhere(array(
@@ -286,7 +285,7 @@ class UserFilter extends \Concept\Filter\AbstractFilter
      * @param boolean $equal
      * @return UserFilter
      */
-    public function setId($user_id, $equal=true)
+    public function setId($user_id, $equal = true)
     {
         $this->setUserId($user_id, $equal);
         return $this;

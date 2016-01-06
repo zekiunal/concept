@@ -88,7 +88,7 @@ interface CollectionInterface extends Countable, IteratorAggregate, ArrayAccess
      *
      * @param string|integer $key The key/index to check for.
      * @return boolean TRUE if the collection contains an item with the specified key/index,
-     *          FALSE otherwise.
+     *                            FALSE otherwise.
      */
     public function containsKey($key);
 
@@ -120,7 +120,7 @@ interface CollectionInterface extends Countable, IteratorAggregate, ArrayAccess
      * Sets an item in the collection at the specified key/index.
      *
      * @param string|integer $key The key/index of the item to set.
-     * @param mixed $value The item to set.
+     * @param mixed $value        The item to set.
      */
     public function set($key, $value);
 
@@ -206,8 +206,8 @@ interface CollectionInterface extends Countable, IteratorAggregate, ArrayAccess
      *
      * @param Closure $p The predicate on which to partition.
      * @return array An array with two items. The first item contains the collection
-     *               of items where the predicate returned TRUE, the second item
-     *               contains the collection of items where the predicate returned FALSE.
+     *                   of items where the predicate returned TRUE, the second item
+     *                   contains the collection of items where the predicate returned FALSE.
      */
     public function partition(Closure $p);
 

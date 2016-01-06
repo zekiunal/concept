@@ -92,7 +92,7 @@ class AbstractCollection implements CollectionInterface
      */
     public function isEmpty()
     {
-        return ! $this->items;
+        return !$this->items;
     }
 
     /**
@@ -183,8 +183,8 @@ class AbstractCollection implements CollectionInterface
     /**
      * Sets an item in the collection at the specified key/index.
      *
-     * @param string|integer $key   The key/index of the item to set.
-     * @param mixed          $value The item to set.
+     * @param string|integer $key The key/index of the item to set.
+     * @param mixed $value        The item to set.
      * @return boolean
      */
     public function set($key, $value)
@@ -380,7 +380,7 @@ class AbstractCollection implements CollectionInterface
      */
     public function offsetSet($offset, $value)
     {
-        if ( ! isset($offset)) {
+        if (!isset($offset)) {
             return $this->add($value);
         }
         return $this->set($offset, $value);

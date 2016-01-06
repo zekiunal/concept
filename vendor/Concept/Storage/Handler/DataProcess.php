@@ -14,14 +14,18 @@ use Concept\Handler\HandlerInterface;
  * @name        DataProcess
  * @version     0.1
  */
-class DataProcess implements  EntityManagerInterface
+class DataProcess implements EntityManagerInterface
 {
     /**
      * @var HandlerInterface
      */
     protected static $processor;
 
-    public function __construct($configuration=array())
+    /**
+     * DataProcess constructor.
+     * @param array $configuration
+     */
+    public function __construct($configuration = array())
     {
         $k = 0;
 
@@ -49,21 +53,20 @@ class DataProcess implements  EntityManagerInterface
 
         if ($parent) {
             $parent->setSuccessor(new NullHandler());
-        }
-        else {
+        } else {
             self::$processor = new NullHandler();
         }
 
     }
 
     /**
-     * @param string    $key
-     * @param array     $config
+     * @param string $key
+     * @param array $config
      * @return          HandlerInterface
      */
-    protected function getProcessor($key, $config=array())
+    protected function getProcessor($key, $config = array())
     {
-        switch($key) {
+        switch ($key) {
             case 'global_cache' :
                 return new GlobalCache($config);
             case 'mysql' :
@@ -92,7 +95,7 @@ class DataProcess implements  EntityManagerInterface
      *
      * @return array|false
      */
-    public static function save(EntityInterface $entity, $process=false)
+    public static function save(EntityInterface $entity, $process = false)
     {
         return self::$processor->save($entity, $process);
     }

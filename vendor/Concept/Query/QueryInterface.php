@@ -21,20 +21,20 @@ interface QueryInterface
     public static function select(FilterInterface $filter);
 
     /**
-     * @param array       $data
-     * @param string      $source
-     * @param array       $properties
+     * @param array $data
+     * @param string $source
+     * @param array $properties
      *
      * @return string
      */
-    public static function insert(array $data, $source, $properties=array());
+    public static function insert(array $data, $source, $properties = array());
 
     /**
-     * @param array       $data
-     * @param string      $source
-     * @param array       $properties
+     * @param array $data
+     * @param string $source
+     * @param array $properties
      *
      * @return string
      */
-    public static function update($data, $source, $properties=array());
+    public static function update($data, $source, $properties = array());
 }

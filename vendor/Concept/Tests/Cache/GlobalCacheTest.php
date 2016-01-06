@@ -24,7 +24,7 @@ class GlobalCacheTest extends \PHPUnit_Framework_TestCase
     public function testSet()
     {
         $cache = new GlobalCache();
-        $cache->set('test','test_value');
+        $cache->set('test', 'test_value');
         $this->assertEquals('test_value', $cache->get('test'));
         $this->assertArrayHasKey('test', $GLOBALS['concept_gc']);
     }
@@ -32,7 +32,7 @@ class GlobalCacheTest extends \PHPUnit_Framework_TestCase
     public function testDelete()
     {
         $cache = new GlobalCache();
-        $cache->set('test','test_value');
+        $cache->set('test', 'test_value');
         $this->assertArrayHasKey('test', $GLOBALS['concept_gc']);
         $cache->delete('test');
         $this->assertArrayNotHasKey('test', $GLOBALS['concept_gc']);

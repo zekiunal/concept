@@ -46,15 +46,17 @@ abstract class AbstractFilter implements FilterInterface
      */
     protected $find_by;
 
-    public function __construct(){}
+    public function __construct()
+    {
+    }
 
     /**
      * @param int $count
      * @param int $offset
      */
-    public function setLimit($count=30, $offset=0)
+    public function setLimit($count = 30, $offset = 0)
     {
-        $this->limit = " LIMIT ". $offset .", ". $count;
+        $this->limit = " LIMIT " . $offset . ", " . $count;
     }
 
     /**
@@ -101,7 +103,7 @@ abstract class AbstractFilter implements FilterInterface
      *
      * @return FilterInterface
      */
-    public function findBy($column_name, $value, $equal=true)
+    public function findBy($column_name, $value, $equal = true)
     {
         $source = $this->getSourceM($column_name);
         $this->filter->addWhere(array(
@@ -120,7 +122,7 @@ abstract class AbstractFilter implements FilterInterface
     protected function getSourceM($column_name)
     {
         $size = count($this->fields);
-        for ($i=0; $i < $size; $i++) {
+        for ($i = 0; $i < $size; $i++) {
             if ($this->fields[$i][1] == $column_name) {
                 return $this->fields[$i][0];
             }
@@ -197,7 +199,7 @@ abstract class AbstractFilter implements FilterInterface
      * @param null $source
      * @return array
      */
-    public function getProperties($source=null)
+    public function getProperties($source = null)
     {
         if ($source) {
             return $this->properties[$source];

@@ -26,9 +26,9 @@ class BusinessTest extends \PHPUnit_Framework_TestCase
          */
         $sql_configurations = array(array(
             'engine'   => 'sqlite',
-            'database' => 'test.sqlite'),3);
+            'database' => 'test.sqlite'), 3);
         $processor_configurations = array(
-            'sqlite'           => $sql_configurations
+            'sqlite' => $sql_configurations
         );
         $processor = new DataProcess($processor_configurations);
         EntityManager::setHandler($processor);
@@ -39,8 +39,8 @@ class BusinessTest extends \PHPUnit_Framework_TestCase
     public function testBind()
     {
         $data = array(
-            'user_id' => 1,
-            'username'=> 'test'
+            'user_id'  => 1,
+            'username' => 'test'
         );
 
         $this->user->bind($data);
@@ -55,8 +55,8 @@ class BusinessTest extends \PHPUnit_Framework_TestCase
         $this->user->setUsername('test');
 
         $data = array(
-            'user_id' => 1,
-            'username'=> 'test'
+            'user_id'  => 1,
+            'username' => 'test'
         );
 
         $this->assertSame($data, $this->user->convertArray());
