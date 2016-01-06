@@ -113,6 +113,11 @@ class User extends \Concept\Business\AbstractBusiness
         return $this;
     }
 
+    public function deleteById()
+    {
+        UserDA::deleteById($this->user_id);
+    }
+
     /**
      * @return       User
      */
@@ -215,6 +220,17 @@ class UserDA
     public static function delete(User $entity)
     {
         return \Concept\Entity\Manager\EntityManager::delete($entity);
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public static function deleteById($id)
+    {
+        $entity = new User();
+        $entity->setId($id);
+        return self::delete($entity);
     }
 
     /**

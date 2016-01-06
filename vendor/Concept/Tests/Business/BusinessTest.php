@@ -69,9 +69,12 @@ class BusinessTest extends \PHPUnit_Framework_TestCase
         $this->user->save();
         $this->assertNotEmpty($this->user->getId());
         $this->assertEquals('username', $this->user->getUsername());
+
+        $user = \UserDA::loadById($this->user->getId());
+        $this->assertEquals($user->getUsername(), $this->user->getUsername());
     }
 
-    public function testDelete()
+    public function testDeleteByEntity()
     {
         $this->user->setUsername('username');
         $this->assertEmpty($this->user->getId());
@@ -79,5 +82,16 @@ class BusinessTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($this->user->getId());
         $this->assertEquals('username', $this->user->getUsername());
         $this->user->delete();
+    }
+
+    public function testDeleteById()
+    {
+        $this->user->setUsername('username');
+        $this->assertEmpty($this->user->getId());
+        $this->user->save();
+
+        $this->assertNotEmpty($this->user->getId());
+        $this->assertEquals('username', $this->user->getUsername());
+        $this->user->deleteById();
     }
 }

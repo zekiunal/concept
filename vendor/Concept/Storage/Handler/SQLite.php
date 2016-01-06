@@ -116,9 +116,7 @@ class SQLite implements HandlerInterface, EntityManagerInterface
             array($source, $source . '_id')
         );
 
-        $statement = SQLiteQuery::delete($source);
-
-        return self::$driver->delete($data, $statement, $properties, $source);
+        return self::$driver->delete($data, SQLiteQuery::delete($source), $properties, $source);
     }
 
     /**
