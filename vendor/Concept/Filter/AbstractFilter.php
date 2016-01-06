@@ -179,7 +179,7 @@ abstract class AbstractFilter implements FilterInterface
      */
     public function getSource()
     {
-        // TODO: Implement getSource() method.
+        return $this->source;
     }
 
     /**

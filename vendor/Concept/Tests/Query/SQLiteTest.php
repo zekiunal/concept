@@ -28,6 +28,18 @@ class SQLiteTest extends \PHPUnit_Framework_TestCase
         $filter->findBy('username', 'zeki');
         $filter->setUserId(1);
         $sql = SQLite::select($filter);
-        $this->assertEquals('SELECT `profile`.`profile_id`, `user`.`user_id`, `user`.`username` FROM `user`, `profile` WHERE 1=1  AND `profile`.`profile_id`=1 AND `user`.`username`=\'zeki\' AND `user`.`user_id`=1 LIMIT 0, 30', $sql);
+        echo $sql."\n";
+        $this->assertEquals('SELECT `profile`.`profile_id`, `user`.`user_id`, `user`.`username`, `user`.`type` FROM `user`, `profile` WHERE 1=1  AND `user`.`user_id`=`profile`.`user_id` AND `profile`.`profile_id`=1 AND `user`.`username`=\'zeki\' AND `user`.`user_id`=1 LIMIT 0, 30', $sql);
+    }
+
+    public function testSelect2()
+    {
+        $filter = new \BandFilter();
+        $filter->setProfileId(1);
+        $filter->findBy('username', 'zeki');
+        $filter->setUserId(1);
+        $sql = SQLite::select($filter);
+        echo $sql;
+        $this->assertEquals('SELECT `profile`.`profile_id`, `user`.`user_id`, `user`.`username`, `user`.`type` FROM `user`, `profile` WHERE 1=1  AND `user`.`user_id`=`profile`.`user_id` AND `profile`.`profile_id`=1 AND `user`.`username`=\'zeki\' AND `user`.`user_id`=1 LIMIT 0, 30', $sql);
     }
 }
