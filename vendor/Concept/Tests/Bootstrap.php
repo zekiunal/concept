@@ -989,13 +989,12 @@ class BandFilter extends ProfileFilter
             'band'
         );
 
-
-            $this->addWhere(array(
-                'source' => 'band',
-                'field'  => 'profile_id',
-                'value'  => '`'.'profile'.'`'.'.`profile_id'.'`',
-                'equal'  => true
-            ));
+        $this->addWhere(array(
+            'source' => 'band',
+            'field'  => 'profile_id',
+            'value'  => '`'.'profile'.'`'.'.`profile_id'.'`',
+            'equal'  => true
+        ));
 
     }
 

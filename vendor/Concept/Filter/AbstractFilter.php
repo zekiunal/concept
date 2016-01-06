@@ -110,7 +110,7 @@ abstract class AbstractFilter implements FilterInterface
      */
     public function findBy($column_name, $value, $equal = true)
     {
-        $source = $this->getSourceM($column_name);
+        $source = $this->getSourceFromFieldList($column_name);
         $this->filter->addWhere(array(
             'source' => $source,
             'field'  => $column_name,
@@ -124,7 +124,7 @@ abstract class AbstractFilter implements FilterInterface
      * @param string $column_name
      * @return string
      */
-    protected function getSourceM($column_name)
+    protected function getSourceFromFieldList($column_name)
     {
         $size = count($this->fields);
         for ($i = 0; $i < $size; $i++) {
