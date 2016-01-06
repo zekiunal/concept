@@ -37,9 +37,9 @@ User::saved(function(){ echo "saved<br>";});
 User::updated(function(){echo "updated<br>";});
 
 \Concept\Database\Driver\MySqlDriver::inserted(function(\Concept\Database\Driver\MySqlDriver $driver) {
-    echo $driver->statement."<br>";
-    var_dump($driver->data);
-    var_dump($driver->properties);
+    echo $driver->getStatement()."<br>";
+    var_dump($driver->getData());
+    var_dump($driver->getProperties());
 });
 
 /**
