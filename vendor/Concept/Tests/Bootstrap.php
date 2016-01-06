@@ -300,7 +300,6 @@ class UserCollection extends \Concept\Collection\AbstractCollection
 }
 
 
-
 class Profile extends User
 {
     /**
@@ -362,7 +361,6 @@ class Profile extends User
     {
         return $this->profile_id;
     }
-
 
 
     /**
@@ -556,8 +554,6 @@ class ProfileCollection extends \Concept\Collection\AbstractCollection
 }
 
 
-
-
 class Band extends Profile
 {
     /**
@@ -618,7 +614,6 @@ class Band extends Profile
     {
         return $this->band_id;
     }
-
 
 
     /**
@@ -882,6 +877,7 @@ class UserFilter extends \Concept\Filter\AbstractFilter
         return $this->user_id;
     }
 }
+
 class ProfileFilter extends UserFilter
 {
     /**
@@ -915,7 +911,7 @@ class ProfileFilter extends UserFilter
         $this->addWhere(array(
             'source' => 'profile',
             'field'  => 'user_id',
-            'value'  => '`'.'user'.'`'.'.`user_id'.'`',
+            'value'  => '`' . 'user' . '`' . '.`user_id' . '`',
             'equal'  => true
         ));
 
@@ -959,6 +955,7 @@ class ProfileFilter extends UserFilter
         return $this->profile_id;
     }
 }
+
 class BandFilter extends ProfileFilter
 {
     /**
@@ -992,7 +989,7 @@ class BandFilter extends ProfileFilter
         $this->addWhere(array(
             'source' => 'band',
             'field'  => 'profile_id',
-            'value'  => '`'.'profile'.'`'.'.`profile_id'.'`',
+            'value'  => '`profile`.`profile_id`',
             'equal'  => true
         ));
 
