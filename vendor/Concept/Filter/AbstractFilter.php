@@ -46,8 +46,13 @@ abstract class AbstractFilter implements FilterInterface
      */
     protected $find_by;
 
-    public function __construct()
+    /**
+     * AbstractFilter constructor.
+     * @param FilterInterface|null $filter
+     */
+    public function __construct(FilterInterface $filter)
     {
+        $this->filter = $filter;
     }
 
     /**

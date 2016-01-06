@@ -40,12 +40,11 @@ class NullHandler extends HandlerAbstract implements HandlerInterface, EntityMan
     }
 
     /**
-     * @param $name
-     * @param $id
+     * @param EntityInterface $entity
      *
      * @return bool
      */
-    public static function delete($name, $id)
+    public static function delete(EntityInterface $entity)
     {
         return false;
     }

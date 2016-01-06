@@ -70,4 +70,14 @@ class BusinessTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($this->user->getId());
         $this->assertEquals('username', $this->user->getUsername());
     }
+
+    public function testDelete()
+    {
+        $this->user->setUsername('username');
+        $this->assertEmpty($this->user->getId());
+        $this->user->save();
+        $this->assertNotEmpty($this->user->getId());
+        $this->assertEquals('username', $this->user->getUsername());
+        $this->user->delete();
+    }
 }

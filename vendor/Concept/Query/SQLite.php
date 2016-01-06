@@ -130,5 +130,16 @@ class SQLite
         $statement .= ' WHERE `' . $source . '`.`' . $source . '_id` = :' . $source . '_id';
         return $statement;
     }
+
+    /**
+     * @param string $source
+     * @return string
+     */
+    public static function delete($source)
+    {
+        $statement  = "DELETE FROM `" . $source . "`";
+        $statement .= ' WHERE `' . $source . '`.`' . $source . '_id` = :' . $source . '_id';
+        return $statement;
+    }
 }
 

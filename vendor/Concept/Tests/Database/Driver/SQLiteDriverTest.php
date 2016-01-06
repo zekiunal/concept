@@ -2,6 +2,8 @@
 namespace Concept\Tests\Database\Driver;
 
 use Concept\Database\Driver\SQLiteDriver;
+use Concept\Entity\Manager\EntityManager;
+use Concept\Query\SQLite;
 
 /**
  * @author      Zeki Unal <zekiunal@gmail.com>
@@ -71,5 +73,25 @@ class SQLiteDriverTest extends \PHPUnit_Framework_TestCase
         $result = $this->driver->runSQL($sql, array());
 
         $this->assertGreaterThan(0, count($result));
+    }
+
+    public function testDelete()
+    {
+        $entity = new \User();
+        $entity->setId(401);
+
+        $source = EntityManager::getEntitySource($entity);
+
+        $data = array(
+            $source . '_id' => $entity->getId()
+        );
+
+        $properties = array(
+            array('user', 'user_id')
+        );
+
+        $statement = SQLite::delete($source);
+
+        $this->driver->delete($data, $statement, $properties, $source);
     }
 }

@@ -102,6 +102,17 @@ class User extends \Concept\Business\AbstractBusiness
         return $this;
     }
 
+    public function delete()
+    {
+        self::fireModelEvent('deleting');
+        if ($this->user_id) {
+            UserDA::delete($this);
+            self::fireModelEvent('deleted');
+        }
+
+        return $this;
+    }
+
     /**
      * @return       User
      */
@@ -195,6 +206,15 @@ class UserDA
     public static function save(User $entity)
     {
         return \Concept\Entity\Manager\EntityManager::save($entity, 'user');
+    }
+
+    /**
+     * @param User $entity
+     * @return bool
+     */
+    public static function delete(User $entity)
+    {
+        return \Concept\Entity\Manager\EntityManager::delete($entity);
     }
 
     /**

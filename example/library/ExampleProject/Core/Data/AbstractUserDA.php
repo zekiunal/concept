@@ -17,7 +17,7 @@ use ExampleProject\Custom\Filter\UserFilter;
 abstract class AbstractUserDA
 {
     /**
-     * @param        int   $user_id
+     * @param        int $user_id
      *
      * @return       User|false
      */
@@ -27,7 +27,7 @@ abstract class AbstractUserDA
         $filter->setUserId($user_id);
         $data = EntityManager::load($filter);
         $result = self::bind($data);
-        if($result->count() > 0) {
+        if ($result->count() > 0) {
             return $result->get(0);
         }
         return false;
@@ -50,11 +50,20 @@ abstract class AbstractUserDA
      */
     public static function save(User $entity)
     {
-        return EntityManager::save($entity, 'user');
+        return EntityManager::save($entity);
     }
 
     /**
-     * @param  array          $array
+     * @param $id
+     * @return bool
+     */
+    public static function delete($id)
+    {
+        return EntityManager::delete('user', $id);
+    }
+
+    /**
+     * @param  array $array
      * @return UserCollection
      */
     public static function bind($array)

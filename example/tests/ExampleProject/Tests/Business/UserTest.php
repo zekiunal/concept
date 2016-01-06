@@ -73,11 +73,15 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $user->setLastName('last_name');
         $this->assertEmpty($user->getId());
         $user->save();
+
         $this->assertNotEmpty($user->getId());
+
         $user->setFirstName('updated_first_name');
         $user->save();
 
         $this->assertEquals($user->getFirstName(), 'updated_first_name');
+
+
 
     }
 }

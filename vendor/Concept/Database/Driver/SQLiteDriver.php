@@ -81,6 +81,35 @@ class SQLiteDriver extends AbstractDriver
     }
 
     /**
+     * @param array $data
+     * @param $statement
+     * @param array $properties
+     * @param $source
+     * @return bool
+     */
+    public function delete(array $data, $statement, array $properties, $source)
+    {
+        $start_time = microtime(TRUE);
+        $this->data = $data;
+        $this->source = $source;
+        $this->properties = $properties;
+        $this->statement = $statement;
+
+        self::fireModelEvent('deleting');
+
+        $statement = $this->connection->prepare($statement);
+        $this->bind($statement, $properties, $data);
+
+        $statement->execute();
+
+        $this->time = microtime(TRUE) - $start_time;
+
+        self::fireModelEvent('deleted');
+
+        return true;
+    }
+
+    /**
      * @param $data
      * @param $statement
      * @param $properties
@@ -120,12 +149,15 @@ class SQLiteDriver extends AbstractDriver
      */
     protected function bind(\PDOStatement $statement, array $properties, array $data)
     {
+
         foreach ($properties as $value) {
             if ($data[$value[1]]) {
                 $statement->bindValue(':' . $value[1], $data[$value[1]]);
             }
         }
     }
+
+
 
     /**
      * Fire the given event for the model.

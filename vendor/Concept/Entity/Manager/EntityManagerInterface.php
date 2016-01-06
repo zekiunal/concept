@@ -30,10 +30,9 @@ interface EntityManagerInterface
     public static function load(FilterInterface $filter);
 
     /**
-     * @param $name
-     * @param $id
+     * @param EntityInterface $entity
      *
      * @return bool
      */
-    public static function delete($name, $id);
+    public static function delete(EntityInterface $entity);
 }

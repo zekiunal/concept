@@ -390,6 +390,10 @@ class AbstractCollection implements CollectionInterface
      * ArrayAccess implementation of offsetUnset()
      *
      * @see remove()
+     *
+     * @param mixed $offset
+     *
+     * @return mixed
      */
     public function offsetUnset($offset)
     {

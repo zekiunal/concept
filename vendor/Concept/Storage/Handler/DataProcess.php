@@ -111,13 +111,12 @@ class DataProcess implements EntityManagerInterface
     }
 
     /**
-     * @param $name
-     * @param $id
+     * @param EntityInterface $entity
      *
      * @return bool
      */
-    public static function delete($name, $id)
+    public static function delete(EntityInterface $entity)
     {
-        return self::$processor->delete($name, $id);
+        return self::$processor->delete($entity);
     }
 }

@@ -2,6 +2,7 @@
 namespace Concept\Tests\Storage\Handler;
 
 use Concept\Storage\Handler\SQLite;
+use ExampleProject\Custom\Business\User;
 
 /**
  * @author      Zeki Unal <zekiunal@gmail.com>
@@ -49,5 +50,13 @@ class SQLiteTest extends \PHPUnit_Framework_TestCase
         $filter->setId($user->getId());
 
         $this->assertSame($this->handler->load($filter), array($user->convertArray()));
+    }
+
+    public function testDelete()
+    {
+        $entity = new \User();
+        $entity->setUsername('username_handler_load_test_' . rand(1000000, 100000000));
+        $user = $this->handler->save($entity);
+        $this->handler->delete($user);
     }
 }

@@ -31,6 +31,7 @@ class SQLite implements HandlerInterface, EntityManagerInterface
 
     /**
      * SQLite constructor.
+     *
      * @param array $configuration
      */
     public function __construct($configuration = array())
@@ -99,14 +100,25 @@ class SQLite implements HandlerInterface, EntityManagerInterface
     }
 
     /**
-     * @param $name
-     * @param $id
+     * @param EntityInterface $entity
      *
      * @return bool
      */
-    public static function delete($name, $id)
+    public static function delete(EntityInterface $entity)
     {
-        // TODO: Implement delete() method.
+        $source = EntityManager::getEntitySource($entity);
+
+        $data = array(
+            $source . '_id' => $entity->getId()
+        );
+
+        $properties = array(
+            array($source, $source . '_id')
+        );
+
+        $statement = SQLiteQuery::delete($source);
+
+        return self::$driver->delete($data, $statement, $properties, $source);
     }
 
     /**
