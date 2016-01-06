@@ -13,28 +13,38 @@ use Concept\Cache\GlobalCache;
  */
 class GlobalCacheTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var GlobalCache
+     */
+    protected $cache;
+
+    public function setUp()
+    {
+        $configuration = array(
+            'prefix' => 'concept_test_gc'
+        );
+        $this->cache = new GlobalCache($configuration);
+    }
+
     public function testGet()
     {
-        $GLOBALS['concept_gc']['test'] = 'test_value';
-        $cache = new GlobalCache();
-        $this->assertEquals('test_value', $cache->get('test'));
-        $this->assertArrayHasKey('test', $GLOBALS['concept_gc']);
+        $GLOBALS['concept_test_gc']['test'] = 'test_value';
+        $this->assertEquals('test_value', $this->cache->get('test'));
+        $this->assertArrayHasKey('test', $GLOBALS['concept_test_gc']);
     }
 
     public function testSet()
     {
-        $cache = new GlobalCache();
-        $cache->set('test', 'test_value');
-        $this->assertEquals('test_value', $cache->get('test'));
-        $this->assertArrayHasKey('test', $GLOBALS['concept_gc']);
+        $this->cache->set('test', 'test_value');
+        $this->assertEquals('test_value', $this->cache->get('test'));
+        $this->assertArrayHasKey('test', $GLOBALS['concept_test_gc']);
     }
 
     public function testDelete()
     {
-        $cache = new GlobalCache();
-        $cache->set('test', 'test_value');
-        $this->assertArrayHasKey('test', $GLOBALS['concept_gc']);
-        $cache->delete('test');
-        $this->assertArrayNotHasKey('test', $GLOBALS['concept_gc']);
+        $this->cache->set('test', 'test_value');
+        $this->assertArrayHasKey('test', $GLOBALS['concept_test_gc']);
+        $this->cache->delete('test');
+        $this->assertArrayNotHasKey('test', $GLOBALS['concept_test_gc']);
     }
 }
