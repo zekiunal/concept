@@ -42,12 +42,10 @@ class SQLiteDriver extends AbstractDriver
         }
 
         if (isset($configuration['engine'])) {
-            $this->charset = $configuration['engine'];
+            $this->engine = $configuration['engine'];
         }
 
-        $this->engine = $configuration['engine'] . ':';
-
-        $db = new PDO($this->engine . $this->database);
+        $db = new PDO($this->engine . ':' . $this->database);
         $db->query('SET NAMES ' . $this->charset);
         $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         $this->connection = $db;
