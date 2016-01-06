@@ -102,20 +102,34 @@ class User extends \Concept\Business\AbstractBusiness
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function delete()
     {
+        $result = false;
         self::fireModelEvent('deleting');
         if ($this->user_id) {
-            UserDA::delete($this);
+            $result = UserDA::delete($this);
             self::fireModelEvent('deleted');
         }
 
-        return $this;
+        return $result;
     }
 
+    /**
+     * @return bool
+     */
     public function deleteById()
     {
-        UserDA::deleteById($this->user_id);
+        $result = false;
+        self::fireModelEvent('deleting');
+        if ($this->user_id) {
+            $result = UserDA::deleteById($this->user_id);
+            self::fireModelEvent('deleted');
+        }
+
+        return $result;
     }
 
     /**
